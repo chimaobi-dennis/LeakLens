@@ -3,8 +3,10 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
-import Index from "./pages/Index.tsx";
-import NotFound from "./pages/NotFound.tsx";
+import { Layout } from "./components/Layout";
+import Mentor from "./pages/Mentor";
+import ModulePlaceholder from "./pages/ModulePlaceholder";
+import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
 
@@ -15,8 +17,15 @@ const App = () => (
       <Sonner />
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<Index />} />
-          {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
+          <Route element={<Layout />}>
+            <Route path="/" element={<Mentor />} />
+            <Route path="/pro-studio" element={<ModulePlaceholder name="ProStudio" />} />
+            <Route path="/campaign-kit" element={<ModulePlaceholder name="CampaignKit" />} />
+            <Route path="/content-calendar" element={<ModulePlaceholder name="ContentCalendar" />} />
+            <Route path="/doc-studio" element={<ModulePlaceholder name="DocStudio" />} />
+            <Route path="/reel-builder" element={<ModulePlaceholder name="ReelBuilder" />} />
+            <Route path="/brand-dna" element={<ModulePlaceholder name="Brand DNA" />} />
+          </Route>
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>
