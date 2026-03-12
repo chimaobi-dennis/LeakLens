@@ -49,7 +49,7 @@ export function AppSidebar() {
                   flex items-center gap-3 px-3 py-2.5 rounded-md text-sm font-ui
                   transition-all duration-200 ease-in-out group relative
                   ${isActive
-                    ? "text-primary border-l-2 border-primary bg-[hsl(43_78%_46%/0.05)]"
+                    ? "text-primary border-l-2 border-primary bg-[#D4A0171A]"
                     : "text-muted-foreground hover:text-foreground border-l-2 border-transparent"
                   }
                 `}
