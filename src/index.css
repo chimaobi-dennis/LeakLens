@@ -5,7 +5,56 @@
 @tailwind utilities;
 
 @layer base {
+  /* ── Light mode (default) ────────────────────────────── */
   :root {
+    --background: 30 23% 94%;
+    --foreground: 240 25% 14%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 240 25% 14%;
+    --card-border: 30 18% 88%;
+    --card-border-hover: 30 14% 80%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 240 25% 14%;
+
+    --primary: 43 78% 46%;
+    --primary-foreground: 213 52% 11%;
+
+    --secondary: 30 18% 88%;
+    --secondary-foreground: 240 25% 14%;
+
+    --muted: 30 14% 90%;
+    --muted-foreground: 220 9% 46%;
+
+    --accent: 43 78% 46%;
+    --accent-foreground: 213 52% 11%;
+
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 30 18% 88%;
+    --input: 30 18% 88%;
+    --ring: 43 78% 46%;
+
+    --radius: 0.5rem;
+
+    --sidebar-background: 0 0% 100%;
+    --sidebar-foreground: 220 9% 46%;
+    --sidebar-primary: 43 78% 46%;
+    --sidebar-primary-foreground: 213 52% 11%;
+    --sidebar-accent: 43 78% 46%;
+    --sidebar-accent-foreground: 213 52% 11%;
+    --sidebar-border: 30 18% 88%;
+    --sidebar-ring: 43 78% 46%;
+
+    --active-tint: 43 78% 46% / 0.08;
+
+    --card-shadow: 0 1px 3px 0 rgba(0,0,0,0.06), 0 1px 2px -1px rgba(0,0,0,0.06);
+  }
+
+  /* ── Dark mode ───────────────────────────────────────── */
+  .dark {
     --background: 213 52% 11%;
     --foreground: 36 33% 94%;
 
@@ -36,8 +85,6 @@
     --input: 210 25% 22%;
     --ring: 43 78% 46%;
 
-    --radius: 0.5rem;
-
     --sidebar-background: 213 52% 11%;
     --sidebar-foreground: 212 12% 59%;
     --sidebar-primary: 43 78% 46%;
@@ -48,12 +95,17 @@
     --sidebar-ring: 43 78% 46%;
 
     --active-tint: 43 78% 46% / 0.05;
+
+    --card-shadow: none;
   }
 }
 
 @layer base {
   * {
     @apply border-border;
+    transition-property: background-color, border-color, color;
+    transition-duration: 200ms;
+    transition-timing-function: ease;
   }
 
   body {
@@ -76,6 +128,22 @@
   }
   .scrollbar-hide::-webkit-scrollbar {
     display: none;
+  }
+
+  /* Styled chat scrollbar */
+  .scrollbar-chat {
+    scrollbar-width: thin;
+    scrollbar-color: hsl(43 78% 46% / 0.4) transparent;
+  }
+  .scrollbar-chat::-webkit-scrollbar {
+    width: 4px;
+  }
+  .scrollbar-chat::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  .scrollbar-chat::-webkit-scrollbar-thumb {
+    background: hsl(43 78% 46% / 0.4);
+    border-radius: 4px;
   }
 }
 
