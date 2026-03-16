@@ -47,30 +47,24 @@ export function TemplateGrid({ templates, categories, onSelect }: Props) {
             className="w-full h-[44px] bg-transparent text-[13px] font-ui text-foreground placeholder:text-muted-foreground outline-none"
           />
         </div>
-        <Select value={category} onValueChange={setCategory}>
-          <SelectTrigger className="w-[140px] h-[36px] text-[12px] font-ui border-border">
-            <SelectValue />
-          </SelectTrigger>
-          <SelectContent>
-            {categories.map((c) => (
-              <SelectItem key={c} value={c} className="text-[12px]">
-                {c}
-              </SelectItem>
-            ))}
-          </SelectContent>
-        </Select>
-        <Select value={sort} onValueChange={setSort}>
-          <SelectTrigger className="w-[120px] h-[36px] text-[12px] font-ui border-border">
-            <SelectValue />
-          </SelectTrigger>
-          <SelectContent>
-            {["Popular", "Newest", "Featured"].map((s) => (
-              <SelectItem key={s} value={s} className="text-[12px]">
-                {s}
-              </SelectItem>
-            ))}
-          </SelectContent>
-        </Select>
+        <select
+          value={category}
+          onChange={(e) => setCategory(e.target.value)}
+          className="h-[36px] px-3 rounded-md border border-border bg-background text-[12px] font-ui text-foreground outline-none"
+        >
+          {categories.map((c) => (
+            <option key={c} value={c}>{c}</option>
+          ))}
+        </select>
+        <select
+          value={sort}
+          onChange={(e) => setSort(e.target.value)}
+          className="h-[36px] px-3 rounded-md border border-border bg-background text-[12px] font-ui text-foreground outline-none"
+        >
+          {["Popular", "Newest", "Featured"].map((s) => (
+            <option key={s} value={s}>{s}</option>
+          ))}
+        </select>
       </div>
 
       {/* Masonry grid */}
