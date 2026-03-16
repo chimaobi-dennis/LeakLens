@@ -6,6 +6,7 @@ import { BriefForm } from "@/components/campaignkit/BriefForm";
 import { SummaryBar } from "@/components/campaignkit/SummaryBar";
 import { PlatformCreative } from "@/components/campaignkit/PlatformCreative";
 import { CopyPanel } from "@/components/campaignkit/CopyPanel";
+import { CampaignHome } from "@/components/campaignkit/CampaignHome";
 import {
   PlatformTab,
   platformTabs,
@@ -19,7 +20,7 @@ import {
   roastHeadlines,
   lagosHeadlines,
 } from "@/components/campaignkit/types";
-import { Download, Bookmark } from "lucide-react";
+import { Download, Bookmark, ArrowLeft } from "lucide-react";
 
 const platformDots: Record<PlatformTab, string> = {
   Headlines: "hsl(43,78%,46%)",
@@ -36,7 +37,7 @@ const CampaignKit = () => {
   const { activeBrand } = useBrand();
   const isRoast = activeBrand?.id === "1";
 
-  const [state, setState] = useState<"brief" | "results">("results"); // default to results for demo
+  const [state, setState] = useState<"home" | "brief" | "results">("home");
   const [selectedAsset, setSelectedAsset] = useState("a1");
   const [brief, setBrief] = useState<BriefData>(getRoastBrief());
   const [activeTab, setActiveTab] = useState<PlatformTab>("Instagram");
@@ -58,8 +59,19 @@ const CampaignKit = () => {
     <div className="flex flex-col min-h-0 flex-1">
       {/* Scrollable content */}
       <div className="flex-1 overflow-y-auto overflow-x-hidden">
-        {state === "brief" ? (
+        {state === "home" ? (
+          <CampaignHome
+            onNewCampaign={() => setState("brief")}
+            onViewCampaign={() => setState("results")}
+          />
+        ) : state === "brief" ? (
           <div className="max-w-3xl mx-auto px-4 md:px-6 py-6">
+            <button
+              onClick={() => setState("home")}
+              className="flex items-center gap-1.5 text-[12px] font-ui text-muted-foreground hover:text-foreground mb-4 transition-colors"
+            >
+              <ArrowLeft size={14} /> Cancel
+            </button>
             <AssetPicker
               assets={assets}
               selectedId={selectedAsset}
@@ -70,8 +82,14 @@ const CampaignKit = () => {
           </div>
         ) : (
           <div className="flex flex-col min-h-0">
-            {/* Summary bar */}
+            {/* Back link + Summary bar */}
             <div className="max-w-5xl w-full mx-auto px-4 md:px-6 pt-4">
+              <button
+                onClick={() => setState("home")}
+                className="flex items-center gap-1.5 text-[12px] font-ui text-muted-foreground hover:text-foreground mb-3 transition-colors"
+              >
+                <ArrowLeft size={14} /> Back to campaigns
+              </button>
               <SummaryBar
                 assetColor={selectedAssetObj.color}
                 brief={brief}
