@@ -13,6 +13,7 @@ interface ChatPanelProps {
   onSaveDNA: (field: string, value: string) => void;
   scrollToMilestoneId: string | null;
   onMilestoneScrolled: () => void;
+  isMobile?: boolean;
 }
 
 export function ChatPanel({
@@ -24,6 +25,7 @@ export function ChatPanel({
   onSaveDNA,
   scrollToMilestoneId,
   onMilestoneScrolled,
+  isMobile,
 }: ChatPanelProps) {
   const [inputValue, setInputValue] = useState("");
   const [dismissedPrompts, setDismissedPrompts] = useState<Set<string>>(new Set());
@@ -33,7 +35,6 @@ export function ChatPanel({
   const milestoneRefs = useRef<Record<string, HTMLDivElement | null>>({});
   const scrollAreaRef = useRef<HTMLDivElement>(null);
 
-  // Scroll to milestone
   useEffect(() => {
     if (!scrollToMilestoneId) return;
     const el = milestoneRefs.current[scrollToMilestoneId];
@@ -67,29 +68,29 @@ export function ChatPanel({
     setDismissedPrompts(prev => new Set(prev).add(afterMessageId));
   };
 
-  // Build marker lookup: milestoneId -> milestone
   const milestoneMap = Object.fromEntries(milestones.map(m => [m.id, m]));
-  // Build marker lookup: beforeMessageId -> milestoneMarker
   const markersByMessage = Object.fromEntries(milestoneMarkers.map(mm => [mm.beforeMessageId, mm]));
-  // Build save prompt lookup
   const promptsByMessage = Object.fromEntries(savePrompts.map(sp => [sp.afterMessageId, sp]));
 
   return (
-    <div className="h-full flex flex-col">
+    <div className="flex-1 min-h-0 min-w-0 flex flex-col overflow-hidden">
       {/* Brand context bar */}
-      <div className="h-10 flex items-center gap-3 px-4 bg-muted/20 border-b border-border flex-shrink-0">
-        <div className="flex items-center gap-1.5">
-          <div className={cn("w-2.5 h-2.5 rounded-full", brand.colorClass)} />
-          <span className="text-[12px] font-ui font-medium text-foreground">{brand.name}</span>
+      <div className="h-10 flex items-center gap-3 px-4 bg-muted/20 border-b border-border flex-shrink-0 min-w-0">
+        <div className="flex items-center gap-1.5 min-w-0">
+          <div className={cn("w-2.5 h-2.5 rounded-full flex-shrink-0", brand.colorClass)} />
+          <span className="text-[12px] font-ui font-medium text-foreground truncate">{brand.name}</span>
         </div>
-        <span className="text-[10px] font-ui font-semibold px-1.5 py-0.5 rounded-full bg-primary/15 text-primary">
+        <span className="text-[10px] font-ui font-semibold px-1.5 py-0.5 rounded-full bg-primary/15 text-primary flex-shrink-0 whitespace-nowrap">
           Brand DNA Active
         </span>
       </div>
 
-      {/* Chat messages */}
-      <ScrollArea className="flex-1 min-h-0" ref={scrollAreaRef}>
-        <div className="max-w-3xl mx-auto px-4 py-6 space-y-1">
+      {/* Chat messages — only scrollable region */}
+      <ScrollArea className="flex-1 min-h-0 min-w-0" ref={scrollAreaRef}>
+        <div className={cn(
+          "max-w-3xl mx-auto px-4 py-6 space-y-1",
+          isMobile && "pb-16"
+        )} style={{ overflowWrap: "break-word", wordWrap: "break-word" }}>
           <p className="text-[11px] font-ui text-muted-foreground text-center py-3">Today at 14:23</p>
 
           {messages.map((msg, i) => {
@@ -102,28 +103,28 @@ export function ChatPanel({
             const showTimestamp = i === 8;
 
             return (
-              <div key={msg.id}>
-                {/* Milestone marker before message */}
+              <div key={msg.id} className="min-w-0">
+                {/* Milestone marker */}
                 {milestone && (
                   <div
                     ref={(el) => { milestoneRefs.current[marker!.milestoneId] = el; }}
                     className={cn(
-                      "flex items-center gap-3 my-5 transition-all duration-500",
+                      "flex items-center gap-2 md:gap-3 my-5 transition-all duration-500 min-w-0",
                       highlightedMilestone === marker!.milestoneId && "bg-primary/10 -mx-4 px-4 py-2 rounded-lg"
                     )}
                   >
-                    <div className="flex-1 h-px bg-border" />
-                    <div className="flex items-center gap-1.5 flex-shrink-0">
+                    <div className="flex-1 h-px bg-border min-w-0" />
+                    <div className="flex items-center gap-1.5 flex-shrink-0 flex-wrap justify-center">
                       <Flag size={11} className="text-primary" />
-                      <span className={cn("text-[12px] font-ui font-medium", categoryTextColors[milestone.category] || "text-muted-foreground")}>
+                      <span className={cn("text-[11px] md:text-[12px] font-ui font-medium", categoryTextColors[milestone.category] || "text-muted-foreground")}>
                         {milestone.category}
                       </span>
-                      <span className="text-[12px] font-ui text-muted-foreground">·</span>
-                      <span className="text-[12px] font-ui text-muted-foreground">{milestone.name}</span>
-                      <span className="text-[12px] font-ui text-muted-foreground">·</span>
-                      <span className="text-[12px] font-ui text-muted-foreground">{milestone.timeAgo}</span>
+                      <span className="text-[11px] md:text-[12px] font-ui text-muted-foreground">·</span>
+                      <span className="text-[11px] md:text-[12px] font-ui text-muted-foreground">{milestone.name}</span>
+                      <span className="text-[11px] md:text-[12px] font-ui text-muted-foreground hidden sm:inline">·</span>
+                      <span className="text-[11px] md:text-[12px] font-ui text-muted-foreground hidden sm:inline">{milestone.timeAgo}</span>
                     </div>
-                    <div className="flex-1 h-px bg-border" />
+                    <div className="flex-1 h-px bg-border min-w-0" />
                   </div>
                 )}
 
@@ -132,17 +133,19 @@ export function ChatPanel({
                 )}
 
                 {/* Message bubble */}
-                <div className={`flex ${msg.role === "founder" ? "justify-end" : "justify-start"} mb-3`}>
+                <div className={cn("flex mb-3 min-w-0", msg.role === "founder" ? "justify-end" : "justify-start")}>
                   <div
                     className={cn(
-                      "max-w-[75%] rounded-xl px-4 py-3",
+                      "rounded-xl px-4 py-3 min-w-0",
+                      "max-w-[90%] md:max-w-[85%] lg:max-w-[75%]",
                       msg.role === "founder"
                         ? "bg-primary/10"
                         : "bg-card border border-border"
                     )}
+                    style={{ overflowWrap: "break-word", wordWrap: "break-word" }}
                   >
                     <p
-                      className="text-[13.5px] font-ui text-foreground whitespace-pre-line"
+                      className="text-[13.5px] font-ui text-foreground whitespace-pre-line break-words"
                       style={{ lineHeight: msg.role === "ai" ? "1.7" : "1.6" }}
                     >
                       {msg.content}
@@ -152,10 +155,13 @@ export function ChatPanel({
 
                 {/* Inline save prompt */}
                 {prompt && !isDismissed && !isSaved && (
-                  <div className="flex justify-start mb-3">
-                    <div className="flex items-center gap-2 h-9 px-3 rounded-lg border border-border bg-card/80 max-w-[75%]">
+                  <div className="flex justify-start mb-3 min-w-0">
+                    <div className={cn(
+                      "flex items-center gap-2 h-9 px-3 rounded-lg border border-border bg-card/80 min-w-0",
+                      isMobile ? "w-full" : "max-w-[75%]"
+                    )}>
                       <Save size={13} className="text-primary flex-shrink-0" />
-                      <span className="text-[12px] font-ui text-foreground truncate">{prompt.label}</span>
+                      <span className="text-[12px] font-ui text-foreground truncate min-w-0 flex-1">{prompt.label}</span>
                       <button
                         onClick={() => handleSave(prompt)}
                         className="h-6 px-2.5 rounded-md bg-primary text-primary-foreground text-[11px] font-ui font-semibold hover:bg-primary/90 transition-colors flex-shrink-0"
@@ -187,13 +193,16 @@ export function ChatPanel({
         </div>
       </ScrollArea>
 
-      {/* Input bar */}
-      <div className="flex-shrink-0 border-t border-border bg-card/50">
+      {/* Input bar — sticky bottom */}
+      <div className={cn(
+        "flex-shrink-0 border-t border-border bg-card/50 z-10",
+        isMobile && "pb-14"
+      )}>
         <div className="max-w-3xl mx-auto flex items-center gap-2 px-4 py-2">
-          <button className="w-9 h-9 rounded-lg flex items-center justify-center text-muted-foreground hover:text-foreground hover:bg-muted/50 transition-colors">
+          <button className="w-9 h-9 rounded-lg flex items-center justify-center text-muted-foreground hover:text-foreground hover:bg-muted/50 transition-colors flex-shrink-0">
             <Paperclip size={18} />
           </button>
-          <button className="w-9 h-9 rounded-lg flex items-center justify-center text-muted-foreground hover:text-foreground hover:bg-muted/50 transition-colors">
+          <button className="w-9 h-9 rounded-lg flex items-center justify-center text-muted-foreground hover:text-foreground hover:bg-muted/50 transition-colors flex-shrink-0">
             <Mic size={18} />
           </button>
           <input
@@ -201,9 +210,9 @@ export function ChatPanel({
             value={inputValue}
             onChange={(e) => setInputValue(e.target.value)}
             placeholder="Continue this conversation..."
-            className="flex-1 h-10 bg-transparent text-[13px] font-ui text-foreground placeholder:text-muted-foreground outline-none"
+            className="flex-1 min-w-0 h-10 bg-transparent text-[13px] font-ui text-foreground placeholder:text-muted-foreground outline-none"
           />
-          <button className="w-9 h-9 rounded-lg bg-primary flex items-center justify-center text-primary-foreground hover:bg-primary/90 transition-colors">
+          <button className="w-9 h-9 rounded-lg bg-primary flex items-center justify-center text-primary-foreground hover:bg-primary/90 transition-colors flex-shrink-0">
             <Send size={16} />
           </button>
         </div>
