@@ -110,6 +110,7 @@
 
   body {
     @apply bg-background text-foreground font-ui;
+    overflow-x: hidden;
   }
 }
 

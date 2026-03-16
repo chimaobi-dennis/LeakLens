@@ -241,7 +241,7 @@ const Home = () => {
       </section>
 
       {/* ── Upcoming posts ── */}
-      <section className="px-4 md:px-6 pb-16 max-w-[1200px] mx-auto">
+      <section className="px-4 md:px-6 pb-16 max-w-full lg:max-w-[1200px] mx-auto">
         <div className="flex items-center justify-between mb-5">
           <h2 className="font-ui text-[11px] uppercase tracking-[0.1em] text-muted-foreground">Upcoming posts</h2>
         </div>
