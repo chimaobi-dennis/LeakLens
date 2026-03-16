@@ -1,12 +1,14 @@
-import { useState, useCallback } from "react";
+import { useState, useCallback, useEffect } from "react";
 import { Menu, PanelRightOpen, PanelRightClose } from "lucide-react";
+import { useSearchParams } from "react-router-dom";
 import { useIsMobile } from "@/hooks/use-mobile";
 import { BrandMilestonePanel } from "@/components/mentor/BrandMilestonePanel";
 import { ChatPanel } from "@/components/mentor/ChatPanel";
 import { BrandDNAPanel } from "@/components/mentor/BrandDNAPanel";
+import { MentorEmptyState, MentorMode } from "@/components/mentor/MentorEmptyState";
 import { Sheet, SheetContent, SheetTitle } from "@/components/ui/sheet";
 import { brands as allBrands, roastData, lagosData } from "@/components/mentor/data";
-import { MentorBrand, BrandData, BrandDNAField, Milestone, Message } from "@/components/mentor/types";
+import { MentorBrand, BrandData, BrandDNAField, Message } from "@/components/mentor/types";
 
 const TABLET_MAX = 1024;
 
@@ -25,10 +27,10 @@ const emptyDNAFields: BrandDNAField[] = [
   "Brand references", "Core promise", "Campaign strategy", "Customer insight", "Product positioning",
 ].map(key => ({ key, label: key, value: null }));
 
-const newBrandGreeting: Message = {
-  id: "new-1",
-  role: "ai",
-  content: "Let us start from the beginning. What are we building? Tell me the idea — not the polished version, the real one.",
+const aiResponses: Record<string, string> = {
+  idea: "Interesting. Most people describe a solution — you are describing a feeling. That is actually the better starting point. Who specifically feels this problem most acutely? Not a demographic — a specific person. Describe them.",
+  brand: "That is worth pulling on. Most founders know something is off before they can name it. What have you tried already to fix it — and why did it not work?",
+  new: "Interesting. Most people describe a solution — you are describing a feeling. That is actually the better starting point. Who specifically feels this problem most acutely? Not a demographic — a specific person. Describe them.",
 };
 
 let brandCounter = 0;
@@ -36,6 +38,7 @@ let brandCounter = 0;
 const Mentor = () => {
   const isMobile = useIsMobile();
   const isTablet = useIsTablet();
+  const [searchParams, setSearchParams] = useSearchParams();
   const [leftOpen, setLeftOpen] = useState(false);
   const [rightOpen, setRightOpen] = useState(false);
 
@@ -47,8 +50,45 @@ const Mentor = () => {
     lagos: lagosData,
   });
 
+  // Track which brands are in empty state (no conversation started yet)
+  const [emptyBrands, setEmptyBrands] = useState<Record<string, MentorMode>>({});
+  // Track brands showing typing indicator
+  const [typingBrands, setTypingBrands] = useState<Set<string>>(new Set());
+
+  // On mount, check for mode param → create a new brand in empty state
+  useEffect(() => {
+    const mode = searchParams.get("mode") as MentorMode;
+    if (mode === "idea" || mode === "brand") {
+      brandCounter++;
+      const newId = `cta-${brandCounter}`;
+      const newBrand: MentorBrand = {
+        id: newId,
+        name: "Untitled Brand",
+        colorClass: "bg-muted-foreground",
+        startedDate: "Mar 2026",
+      };
+      const newData: BrandData = {
+        brand: newBrand,
+        milestones: [],
+        messages: [],
+        savePrompts: [],
+        milestoneMarkers: [],
+        dnaFields: emptyDNAFields.map(f => ({ ...f })),
+      };
+      setBrands(prev => [...prev, newBrand]);
+      setBrandDataMap(prev => ({ ...prev, [newId]: newData }));
+      setActiveBrandId(newId);
+      setEmptyBrands(prev => ({ ...prev, [newId]: mode }));
+      // Clear the param so refresh doesn't re-trigger
+      setSearchParams({}, { replace: true });
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   const activeBrandData = brandDataMap[activeBrandId];
   const activeBrand = brands.find(b => b.id === activeBrandId) || brands[0];
+  const activeEmptyMode = emptyBrands[activeBrandId] || null;
+  const isTyping = typingBrands.has(activeBrandId);
 
   const [scrollToMilestoneId, setScrollToMilestoneId] = useState<string | null>(null);
   const [highlightDNAField, setHighlightDNAField] = useState<string | null>(null);
@@ -69,7 +109,7 @@ const Mentor = () => {
     const newData: BrandData = {
       brand: newBrand,
       milestones: [],
-      messages: [newBrandGreeting],
+      messages: [],
       savePrompts: [],
       milestoneMarkers: [],
       dnaFields: emptyDNAFields.map(f => ({ ...f })),
@@ -77,7 +117,48 @@ const Mentor = () => {
     setBrands(prev => [...prev, newBrand]);
     setBrandDataMap(prev => ({ ...prev, [newId]: newData }));
     setActiveBrandId(newId);
+    setEmptyBrands(prev => ({ ...prev, [newId]: "new" }));
   };
+
+  const handleEmptySubmit = useCallback((text: string) => {
+    const brandId = activeBrandId;
+    const mode = emptyBrands[brandId] || "new";
+
+    // Add founder message immediately
+    const founderMsg: Message = { id: `${brandId}-f1`, role: "founder", content: text };
+    setBrandDataMap(prev => ({
+      ...prev,
+      [brandId]: { ...prev[brandId], messages: [founderMsg] },
+    }));
+
+    // Remove from empty state
+    setEmptyBrands(prev => {
+      const next = { ...prev };
+      delete next[brandId];
+      return next;
+    });
+
+    // Show typing indicator
+    setTypingBrands(prev => new Set(prev).add(brandId));
+
+    // After 1500ms, add AI response
+    setTimeout(() => {
+      const aiMsg: Message = {
+        id: `${brandId}-a1`,
+        role: "ai",
+        content: aiResponses[mode] || aiResponses.new,
+      };
+      setBrandDataMap(prev => ({
+        ...prev,
+        [brandId]: { ...prev[brandId], messages: [...prev[brandId].messages, aiMsg] },
+      }));
+      setTypingBrands(prev => {
+        const next = new Set(prev);
+        next.delete(brandId);
+        return next;
+      });
+    }, 1500);
+  }, [activeBrandId, emptyBrands]);
 
   const handleSelectMilestone = (milestoneId: string) => {
     setScrollToMilestoneId(milestoneId);
@@ -141,17 +222,14 @@ const Mentor = () => {
 
       {/* Centre panel */}
       <div className="flex-1 min-w-0 max-w-full flex flex-col overflow-hidden relative" style={{ boxSizing: "border-box" }}>
-        {/* Mobile top bar with menu + right panel toggle */}
+        {/* Mobile top bar */}
         {isMobile && (
           <div className="h-10 flex items-center px-3 gap-2 border-b border-border flex-shrink-0">
             <button onClick={() => setLeftOpen(true)} className="w-8 h-8 rounded-lg flex items-center justify-center text-muted-foreground hover:text-foreground hover:bg-muted/50 transition-colors">
               <Menu size={18} />
             </button>
             <span className="text-[13px] font-ui text-foreground flex-1">Mentor</span>
-            <button
-              onClick={() => setRightOpen(!rightOpen)}
-              className="w-8 h-8 rounded-lg flex items-center justify-center text-muted-foreground hover:text-foreground hover:bg-muted/50 transition-colors"
-            >
+            <button onClick={() => setRightOpen(!rightOpen)} className="w-8 h-8 rounded-lg flex items-center justify-center text-muted-foreground hover:text-foreground hover:bg-muted/50 transition-colors">
               {rightOpen ? <PanelRightClose size={18} /> : <PanelRightOpen size={18} />}
             </button>
           </div>
@@ -159,15 +237,15 @@ const Mentor = () => {
 
         {/* Tablet right panel toggle */}
         {isTablet && !isMobile && (
-          <button
-            onClick={() => setRightOpen(!rightOpen)}
-            className="absolute top-2 right-2 z-10 w-8 h-8 rounded-lg flex items-center justify-center text-muted-foreground hover:text-foreground hover:bg-muted/50 transition-colors"
-          >
+          <button onClick={() => setRightOpen(!rightOpen)} className="absolute top-2 right-2 z-10 w-8 h-8 rounded-lg flex items-center justify-center text-muted-foreground hover:text-foreground hover:bg-muted/50 transition-colors">
             {rightOpen ? <PanelRightClose size={18} /> : <PanelRightOpen size={18} />}
           </button>
         )}
 
-        {activeBrandData && (
+        {/* Empty state or chat */}
+        {activeEmptyMode ? (
+          <MentorEmptyState mode={activeEmptyMode} onSubmit={handleEmptySubmit} />
+        ) : activeBrandData ? (
           <ChatPanel
             brand={activeBrand}
             messages={activeBrandData.messages}
@@ -178,8 +256,9 @@ const Mentor = () => {
             scrollToMilestoneId={scrollToMilestoneId}
             onMilestoneScrolled={handleMilestoneScrolled}
             isMobile={isMobile}
+            isTyping={isTyping}
           />
-        )}
+        ) : null}
       </div>
 
       {/* Right panel */}
