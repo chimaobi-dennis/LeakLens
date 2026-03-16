@@ -6,6 +6,7 @@ import { BriefForm } from "@/components/campaignkit/BriefForm";
 import { SummaryBar } from "@/components/campaignkit/SummaryBar";
 import { PlatformCreative } from "@/components/campaignkit/PlatformCreative";
 import { CopyPanel } from "@/components/campaignkit/CopyPanel";
+import { CampaignHome } from "@/components/campaignkit/CampaignHome";
 import {
   PlatformTab,
   platformTabs,
@@ -19,7 +20,7 @@ import {
   roastHeadlines,
   lagosHeadlines,
 } from "@/components/campaignkit/types";
-import { Download, Bookmark } from "lucide-react";
+import { Download, Bookmark, ArrowLeft } from "lucide-react";
 
 const platformDots: Record<PlatformTab, string> = {
   Headlines: "hsl(43,78%,46%)",
@@ -36,7 +37,7 @@ const CampaignKit = () => {
   const { activeBrand } = useBrand();
   const isRoast = activeBrand?.id === "1";
 
-  const [state, setState] = useState<"brief" | "results">("results"); // default to results for demo
+  const [state, setState] = useState<"home" | "brief" | "results">("home");
   const [selectedAsset, setSelectedAsset] = useState("a1");
   const [brief, setBrief] = useState<BriefData>(getRoastBrief());
   const [activeTab, setActiveTab] = useState<PlatformTab>("Instagram");
