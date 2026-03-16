@@ -133,6 +133,7 @@ function ModuleVisual({ type }: { type: string }) {
 }
 
 const Home = () => {
+  const navigate = useNavigate();
   const chatRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
