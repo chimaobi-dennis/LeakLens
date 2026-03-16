@@ -26,7 +26,7 @@ const App = () => (
               <Route element={<Layout />}>
                 <Route path="/" element={<Home />} />
                 <Route path="/mentor" element={<Mentor />} />
-                <Route path="/pro-studio" element={<ModulePlaceholder name="ProStudio" />} />
+                <Route path="/pro-studio" element={<ProStudio />} />
                 <Route path="/campaign-kit" element={<ModulePlaceholder name="CampaignKit" />} />
                 <Route path="/content-calendar" element={<ModulePlaceholder name="ContentCalendar" />} />
                 <Route path="/doc-studio" element={<ModulePlaceholder name="DocStudio" />} />
