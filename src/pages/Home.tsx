@@ -146,7 +146,7 @@ const Home = () => {
       <div className="pointer-events-none absolute top-0 right-0 w-[500px] h-[400px] bg-[radial-gradient(ellipse_at_top_right,hsl(var(--primary)/0.06),transparent_70%)]" />
 
       {/* ── Hero ── */}
-      <section className="relative grid grid-cols-1 lg:grid-cols-5 gap-6 lg:gap-8 px-4 md:px-6 pt-8 md:pt-10 pb-8 md:pb-12 max-w-[1200px] mx-auto">
+      <section className="relative grid grid-cols-1 lg:grid-cols-5 gap-6 lg:gap-8 px-4 md:px-6 pt-8 md:pt-10 pb-8 md:pb-12 max-w-full lg:max-w-[1200px] mx-auto">
         <div className="lg:col-span-3 flex flex-col justify-center gap-4 md:gap-5">
           <div className="flex items-center gap-3">
             <div className="w-4 h-4 rounded-full bg-primary animate-amber-pulse flex-shrink-0" />
@@ -198,11 +198,11 @@ const Home = () => {
       </section>
 
       {/* ── Module grid ── */}
-      <section className="px-4 md:px-6 pb-8 md:pb-12 pt-12 md:pt-20 max-w-[1200px] mx-auto">
+      <section className="px-4 md:px-6 pb-8 md:pb-12 pt-12 md:pt-20 max-w-full lg:max-w-[1200px] mx-auto">
         <h2 className="font-ui text-[11px] uppercase tracking-[0.1em] text-muted-foreground mb-5">
           Everything you need to build your brand
         </h2>
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+        <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4">
           {modules.map((mod) => (
             <Link
               key={mod.name}
@@ -227,7 +227,7 @@ const Home = () => {
       </section>
 
       {/* ── Recent assets ── */}
-      <section className="px-4 md:px-6 pb-8 md:pb-12 max-w-[1200px] mx-auto">
+      <section className="px-4 md:px-6 pb-8 md:pb-12 max-w-full lg:max-w-[1200px] mx-auto">
         <div className="flex items-center justify-between mb-5">
           <h2 className="font-ui text-[11px] uppercase tracking-[0.1em] text-muted-foreground">Recent assets</h2>
           <button className="font-ui text-[13px] text-primary hover:underline">View all</button>
@@ -241,7 +241,7 @@ const Home = () => {
       </section>
 
       {/* ── Upcoming posts ── */}
-      <section className="px-4 md:px-6 pb-16 max-w-[1200px] mx-auto">
+      <section className="px-4 md:px-6 pb-16 max-w-full lg:max-w-[1200px] mx-auto">
         <div className="flex items-center justify-between mb-5">
           <h2 className="font-ui text-[11px] uppercase tracking-[0.1em] text-muted-foreground">Upcoming posts</h2>
         </div>
