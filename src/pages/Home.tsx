@@ -233,10 +233,10 @@ const Home = () => {
           <button className="font-ui text-[13px] text-primary hover:underline">View all</button>
         </div>
         <div className="hidden md:flex gap-4 overflow-x-auto pb-2 scrollbar-hide">
-          {recentAssets.map((asset, i) => <AssetCard key={i} asset={asset} />)}
+          {recentAssets.map((asset, i) => <AssetCard key={i} asset={asset} tablet />)}
         </div>
         <div className="grid grid-cols-2 gap-3 md:hidden">
-          {recentAssets.map((asset, i) => <AssetCard key={i} asset={asset} />)}
+          {recentAssets.map((asset, i) => <AssetCard key={i} asset={asset} mobile />)}
         </div>
       </section>
 
