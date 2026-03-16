@@ -10,6 +10,7 @@ import Home from "./pages/Home";
 import Mentor from "./pages/Mentor";
 import ModulePlaceholder from "./pages/ModulePlaceholder";
 import ProStudio from "./pages/ProStudio";
+import CampaignKit from "./pages/CampaignKit";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -27,7 +28,7 @@ const App = () => (
                 <Route path="/" element={<Home />} />
                 <Route path="/mentor" element={<Mentor />} />
                 <Route path="/pro-studio" element={<ProStudio />} />
-                <Route path="/campaign-kit" element={<ModulePlaceholder name="CampaignKit" />} />
+                <Route path="/campaign-kit" element={<CampaignKit />} />
                 <Route path="/content-calendar" element={<ModulePlaceholder name="ContentCalendar" />} />
                 <Route path="/doc-studio" element={<ModulePlaceholder name="DocStudio" />} />
                 <Route path="/reel-builder" element={<ModulePlaceholder name="ReelBuilder" />} />
