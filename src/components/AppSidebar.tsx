@@ -92,7 +92,7 @@ export function AppSidebar() {
           {secondaryItems.map((item) => renderTooltipItem(item))}
         </nav>
         <div className="py-4 flex justify-center">
-          <div className="w-8 h-8 rounded-full bg-primary flex items-center justify-center text-primary-foreground text-xs font-ui font-semibold">RC</div>
+          <div className="w-8 h-8 rounded-full bg-primary flex items-center justify-center text-primary-foreground text-xs font-ui font-semibold">CK</div>
         </div>
       </aside>
 

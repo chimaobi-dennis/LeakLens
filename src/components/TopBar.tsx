@@ -1,6 +1,7 @@
 import { useLocation } from "react-router-dom";
-import { HelpCircle, MessageSquarePlus, Bell, Sun, Moon, ChevronRight, LogOut } from "lucide-react";
+import { HelpCircle, MessageSquarePlus, Bell, Sun, Moon, ChevronRight, ChevronDown, LogOut, Check } from "lucide-react";
 import { useTheme } from "@/hooks/use-theme";
+import { useBrand } from "@/hooks/use-brand";
 import { useState, useRef, useEffect } from "react";
 
 const routeTitles: Record<string, string> = {
@@ -24,6 +25,7 @@ function getGreeting() {
 export function TopBar() {
   const location = useLocation();
   const { theme, toggleTheme } = useTheme();
+  const { brands, activeBrand, setActiveBrand, hasBrands } = useBrand();
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
 
@@ -41,7 +43,7 @@ export function TopBar() {
   }, []);
 
   return (
-    <header className="h-14 flex items-center justify-between px-4 md:px-6 bg-sidebar border-b-[0.5px] border-border flex-shrink-0">
+    <header className="sticky top-0 z-50 h-14 flex items-center justify-between px-4 md:px-6 bg-sidebar/95 backdrop-blur-sm border-b-[0.5px] border-border flex-shrink-0">
       {/* Left — page title */}
       <h1 className="font-display text-lg text-foreground truncate">{title}</h1>
 
@@ -81,23 +83,50 @@ export function TopBar() {
             onClick={() => setDropdownOpen(!dropdownOpen)}
             className="w-9 h-9 rounded-full bg-primary flex items-center justify-center text-primary-foreground text-sm font-ui font-semibold hover:ring-2 hover:ring-primary/30 transition-all duration-200"
           >
-            RC
+            CK
           </button>
 
           {dropdownOpen && (
             <div className="absolute top-12 right-0 w-[280px] rounded-2xl bg-card border border-card-border shadow-xl z-50 overflow-hidden animate-in fade-in slide-in-from-top-2 duration-200">
-              {/* Brand identity card */}
+              {/* User identity */}
               <div className="p-5 flex items-center gap-3">
                 <div className="w-12 h-12 rounded-full bg-primary flex items-center justify-center text-primary-foreground text-lg font-ui font-semibold flex-shrink-0">
-                  RC
+                  CK
                 </div>
                 <div className="flex-1 min-w-0">
-                  <p className="font-display text-base text-foreground">Roast and Co</p>
+                  <p className="font-display text-base text-foreground">Chimaobi Kingsley</p>
                   <div className="flex items-center gap-2 mt-0.5">
+                    <span className="text-[13px] font-ui text-muted-foreground">Founder</span>
                     <span className="text-[10px] font-ui font-semibold px-1.5 py-0.5 rounded-full bg-primary/15 text-primary">Pro Plan</span>
                   </div>
-                  <p className="text-[12px] font-ui text-muted-foreground mt-0.5 truncate">hello@roastandco.com</p>
+                  <p className="text-[12px] font-ui text-muted-foreground mt-0.5 truncate">chimaobi@roastandco.com</p>
                 </div>
+              </div>
+
+              <div className="border-t border-border" />
+
+              {/* Brand switcher */}
+              <div className="p-4">
+                <p className="text-[11px] font-ui uppercase tracking-[0.1em] text-muted-foreground mb-2.5">Your brands</p>
+                <div className="space-y-0.5">
+                  {brands.map((brand) => (
+                    <button
+                      key={brand.id}
+                      onClick={() => setActiveBrand(brand)}
+                      className="w-full flex items-center gap-2.5 px-2 py-2 rounded-md text-[13px] font-ui text-foreground hover:bg-muted/50 transition-colors duration-200"
+                    >
+                      <div className={`w-3 h-3 rounded-full ${brand.color} flex-shrink-0`} />
+                      <span className="flex-1 text-left">{brand.name}</span>
+                      {activeBrand?.id === brand.id && <Check size={14} className="text-primary" />}
+                    </button>
+                  ))}
+                </div>
+                {!hasBrands && (
+                  <p className="text-[11px] font-ui text-muted-foreground mt-2">Create your first brand by starting a Mentor session.</p>
+                )}
+                <button className="w-full flex items-center gap-2 px-2 py-2 mt-1 rounded-md text-[12px] font-ui text-primary/70 hover:text-primary hover:bg-muted/50 transition-colors duration-200">
+                  + Add new brand
+                </button>
               </div>
 
               <div className="border-t border-border" />
@@ -105,10 +134,10 @@ export function TopBar() {
               {/* Plan details */}
               <div className="p-4 space-y-2.5">
                 {[
-                  ["Plan", "Pro"],
                   ["Credits remaining", "847"],
                   ["Plan renews", "Apr 15, 2026"],
                   ["Member since", "Jan 2026"],
+                  ["Plan", "Pro"],
                 ].map(([label, value]) => (
                   <div key={label} className="flex items-center justify-between">
                     <span className="text-[12px] font-ui text-muted-foreground">{label}</span>
