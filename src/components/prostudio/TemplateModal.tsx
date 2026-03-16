@@ -50,7 +50,8 @@ export function TemplateModal({ template, open, onClose, type, brandName, brandI
 
   return (
     <Dialog open={open} onOpenChange={(v) => !v && onClose()}>
-      <DialogContent className="max-w-[880px] w-[90vw] p-0 overflow-hidden rounded-2xl border-border gap-0">
+      <DialogContent className="max-w-[880px] w-[90vw] p-0 overflow-hidden rounded-2xl border-border gap-0" aria-describedby={undefined}>
+        <DialogTitle className="sr-only">{template?.name ?? "Template"}</DialogTitle>
         <button
           onClick={onClose}
           className="absolute top-3 right-3 z-10 w-8 h-8 rounded-full bg-muted/80 flex items-center justify-center hover:bg-muted transition-colors"
