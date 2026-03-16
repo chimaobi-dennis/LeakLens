@@ -202,7 +202,7 @@ const Home = () => {
         <h2 className="font-ui text-[11px] uppercase tracking-[0.1em] text-muted-foreground mb-5">
           Everything you need to build your brand
         </h2>
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+        <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4" style={{ gridTemplateColumns: undefined }}>
           {modules.map((mod) => (
             <Link
               key={mod.name}
