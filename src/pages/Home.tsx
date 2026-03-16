@@ -198,7 +198,7 @@ const Home = () => {
       </section>
 
       {/* ── Module grid ── */}
-      <section className="px-4 md:px-6 pb-8 md:pb-12 pt-12 md:pt-20 max-w-[1200px] mx-auto">
+      <section className="px-4 md:px-6 pb-8 md:pb-12 pt-12 md:pt-20 max-w-full lg:max-w-[1200px] mx-auto">
         <h2 className="font-ui text-[11px] uppercase tracking-[0.1em] text-muted-foreground mb-5">
           Everything you need to build your brand
         </h2>
