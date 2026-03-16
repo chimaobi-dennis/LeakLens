@@ -1,5 +1,5 @@
-import { useState } from "react";
-import { X, Trash2, Info } from "lucide-react";
+import { useState, useRef, useEffect } from "react";
+import { X, Trash2, Info, ChevronDown, Check, Plus } from "lucide-react";
 import { Switch } from "@/components/ui/switch";
 import { CalendarSlot, calendarAssets, platformStyles } from "./types";
 import { toast } from "sonner";
@@ -14,11 +14,73 @@ interface SlotDetailProps {
 const timeOptions = ["06:00","07:00","08:00","09:00","10:00","11:00","12:00","13:00","14:00","15:00","16:00","17:00","18:00","19:00","20:00","21:00","22:00"];
 const platforms: Array<CalendarSlot["platform"]> = ["Instagram", "Facebook", "Twitter/X", "WhatsApp"];
 
+function AssetPickerDropdown({ selectedAssetId, onSelect }: { selectedAssetId: string; onSelect: (id: string) => void }) {
+  const [open, setOpen] = useState(false);
+  const ref = useRef<HTMLDivElement>(null);
+  const selected = calendarAssets.find((a) => a.id === selectedAssetId) ?? calendarAssets[0];
+
+  useEffect(() => {
+    const handler = (e: MouseEvent) => {
+      if (ref.current && !ref.current.contains(e.target as Node)) setOpen(false);
+    };
+    document.addEventListener("mousedown", handler);
+    return () => document.removeEventListener("mousedown", handler);
+  }, []);
+
+  return (
+    <div className="relative" ref={ref}>
+      <button
+        type="button"
+        onClick={() => setOpen(!open)}
+        className="w-full h-11 rounded-lg border border-border bg-background px-3 flex items-center justify-between cursor-pointer"
+      >
+        <div className="flex items-center gap-2">
+          <div className="w-8 h-8 rounded flex-shrink-0" style={{ backgroundColor: selected.color + "66" }} />
+          <span className="text-[12px] font-ui text-foreground">{selected.name}</span>
+        </div>
+        <ChevronDown size={14} className="text-muted-foreground" />
+      </button>
+
+      {open && (
+        <div className="absolute top-full left-0 right-0 mt-1 rounded-lg border border-border bg-popover max-h-[240px] overflow-y-auto z-20">
+          {calendarAssets.map((asset) => (
+            <button
+              key={asset.id}
+              type="button"
+              onClick={() => { onSelect(asset.id); setOpen(false); }}
+              className="w-full h-12 px-3 flex items-center gap-2.5 cursor-pointer hover:bg-muted/50 transition-colors"
+            >
+              <div className="w-9 h-9 rounded flex-shrink-0" style={{ backgroundColor: asset.color }} />
+              <span className="text-[12px] font-ui text-foreground flex-1 text-left">{asset.name}</span>
+              <span
+                className="text-[10px] font-ui px-2 py-0.5 rounded-full text-white"
+                style={{ backgroundColor: asset.platformColor }}
+              >
+                {asset.platform}
+              </span>
+              {asset.id === selectedAssetId && (
+                <Check size={14} className="text-primary flex-shrink-0" />
+              )}
+            </button>
+          ))}
+          <div className="border-t border-border">
+            <button type="button" className="w-full h-12 px-3 flex items-center gap-2 text-primary cursor-pointer hover:bg-muted/50 transition-colors">
+              <Plus size={14} />
+              <span className="text-[12px] font-ui">Upload new asset</span>
+            </button>
+          </div>
+        </div>
+      )}
+    </div>
+  );
+}
+
 export function SlotDetail({ slot, isNew, newDate, onClose }: SlotDetailProps) {
   const [reminder, setReminder] = useState(true);
   const [selectedPlatform, setSelectedPlatform] = useState<CalendarSlot["platform"]>(slot?.platform ?? "Instagram");
   const [copy, setCopy] = useState(slot?.copy ?? "Write your caption...");
   const [time, setTime] = useState(slot?.time ?? "09:00");
+  const [selectedAssetId, setSelectedAssetId] = useState(slot?.assetId ?? "a1");
 
   const asset = calendarAssets.find((a) => a.id === (slot?.assetId ?? "a1"));
   const pStyle = platformStyles[slot?.platform ?? selectedPlatform];
@@ -87,13 +149,17 @@ export function SlotDetail({ slot, isNew, newDate, onClose }: SlotDetailProps) {
           </>
         )}
 
-        {/* Asset preview */}
+        {/* Asset */}
         <div>
           <label className="text-[10px] uppercase tracking-wider text-muted-foreground font-ui block mb-2">Asset</label>
-          <div
-            className="w-full rounded-lg overflow-hidden"
-            style={{ backgroundColor: asset?.color ?? "#C8951A", height: 160 }}
-          />
+          {isNew ? (
+            <AssetPickerDropdown selectedAssetId={selectedAssetId} onSelect={setSelectedAssetId} />
+          ) : (
+            <div
+              className="w-full rounded-lg overflow-hidden"
+              style={{ backgroundColor: asset?.color ?? "#C8951A", height: 160 }}
+            />
+          )}
         </div>
 
         {/* Copy */}
