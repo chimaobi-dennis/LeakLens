@@ -13,6 +13,9 @@ export default {
       },
     },
     extend: {
+      screens: {
+        xs: "480px",
+      },
       fontFamily: {
         display: ["Playfair Display", "serif"],
         ui: ["DM Sans", "sans-serif"],
