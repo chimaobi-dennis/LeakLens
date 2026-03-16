@@ -146,7 +146,7 @@ const Home = () => {
       <div className="pointer-events-none absolute top-0 right-0 w-[500px] h-[400px] bg-[radial-gradient(ellipse_at_top_right,hsl(var(--primary)/0.06),transparent_70%)]" />
 
       {/* ── Hero ── */}
-      <section className="relative grid grid-cols-1 lg:grid-cols-5 gap-6 lg:gap-8 px-4 md:px-6 pt-8 md:pt-10 pb-8 md:pb-12 max-w-[1200px] mx-auto">
+      <section className="relative grid grid-cols-1 lg:grid-cols-5 gap-6 lg:gap-8 px-4 md:px-6 pt-8 md:pt-10 pb-8 md:pb-12 max-w-full lg:max-w-[1200px] mx-auto">
         <div className="lg:col-span-3 flex flex-col justify-center gap-4 md:gap-5">
           <div className="flex items-center gap-3">
             <div className="w-4 h-4 rounded-full bg-primary animate-amber-pulse flex-shrink-0" />
