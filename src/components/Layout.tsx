@@ -18,7 +18,7 @@ export function Layout() {
         <AppSidebar />
         <main className={`flex-1 min-w-0 overflow-x-hidden pb-16 md:pb-0 ${isFullHeight ? "overflow-hidden flex flex-col" : "overflow-y-auto"}`}>
           {showBrandBar && (
-            <div className="relative">
+            <div className="sticky top-0 z-10 relative">
               <BrandContextBar />
             </div>
           )}
