@@ -82,8 +82,14 @@ const CampaignKit = () => {
           </div>
         ) : (
           <div className="flex flex-col min-h-0">
-            {/* Summary bar */}
+            {/* Back link + Summary bar */}
             <div className="max-w-5xl w-full mx-auto px-4 md:px-6 pt-4">
+              <button
+                onClick={() => setState("home")}
+                className="flex items-center gap-1.5 text-[12px] font-ui text-muted-foreground hover:text-foreground mb-3 transition-colors"
+              >
+                <ArrowLeft size={14} /> Back to campaigns
+              </button>
               <SummaryBar
                 assetColor={selectedAssetObj.color}
                 brief={brief}
