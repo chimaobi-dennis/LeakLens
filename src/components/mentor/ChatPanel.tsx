@@ -133,16 +133,16 @@ export function ChatPanel({
                 )}
 
                 {/* Message bubble */}
-                <div className={cn("flex mb-3 min-w-0", msg.role === "founder" ? "justify-end" : "justify-start")}>
+                <div className={cn("flex mb-3 w-full max-w-full overflow-hidden", msg.role === "founder" ? "justify-end" : "justify-start")} style={{ minWidth: 0, boxSizing: "border-box" }}>
                   <div
                     className={cn(
-                      "rounded-xl px-4 py-3 min-w-0",
+                      "rounded-xl px-4 py-3",
                       "max-w-[90%] md:max-w-[85%] lg:max-w-[75%]",
                       msg.role === "founder"
                         ? "bg-primary/10"
                         : "bg-card border border-border"
                     )}
-                    style={{ overflowWrap: "break-word", wordWrap: "break-word" }}
+                    style={{ overflowWrap: "break-word", wordWrap: "break-word", wordBreak: "break-word", minWidth: 0, flexShrink: 1, boxSizing: "border-box" }}
                   >
                     <p
                       className="text-[13.5px] font-ui text-foreground whitespace-pre-line break-words"
