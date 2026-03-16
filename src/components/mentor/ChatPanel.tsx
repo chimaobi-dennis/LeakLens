@@ -14,6 +14,7 @@ interface ChatPanelProps {
   scrollToMilestoneId: string | null;
   onMilestoneScrolled: () => void;
   isMobile?: boolean;
+  isTyping?: boolean;
 }
 
 export function ChatPanel({
