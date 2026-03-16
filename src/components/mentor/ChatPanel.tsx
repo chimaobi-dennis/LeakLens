@@ -1,6 +1,6 @@
 import { Send, Paperclip, Mic, Flag, Save, Check, X } from "lucide-react";
 import { useState, useRef, useEffect, useCallback } from "react";
-import { ScrollArea } from "@/components/ui/scroll-area";
+
 import { cn } from "@/lib/utils";
 import { MentorBrand, Message, InlineSavePrompt, MilestoneMarker, Milestone, categoryTextColors } from "./types";
 
