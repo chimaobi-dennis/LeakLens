@@ -27,6 +27,7 @@ export function ChatPanel({
   scrollToMilestoneId,
   onMilestoneScrolled,
   isMobile,
+  isTyping,
 }: ChatPanelProps) {
   const [inputValue, setInputValue] = useState("");
   const [dismissedPrompts, setDismissedPrompts] = useState<Set<string>>(new Set());
