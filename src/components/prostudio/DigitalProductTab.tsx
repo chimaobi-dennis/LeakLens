@@ -47,16 +47,15 @@ export function DigitalProductTab({ brandId }: Props) {
   const [customerName, setCustomerName] = useState(defaults.name);
   const [customerQuote, setCustomerQuote] = useState(defaults.quote);
   const [customerRole, setCustomerRole] = useState(defaults.role);
-  const [rating, setRating] = useState(4);
 
-  // Reset form when brand changes
   const currentDefaults = brandDefaults[brandId] || brandDefaults["1"];
-  if (customerName === (brandDefaults[brandId === "1" ? "2" : "1"] || brandDefaults["1"]).name) {
-    // brand switched — reset
-    setCustomerName(currentDefaults.name);
-    setCustomerQuote(currentDefaults.quote);
-    setCustomerRole(currentDefaults.role);
-  }
+
+  useEffect(() => {
+    const d = brandDefaults[brandId] || brandDefaults["1"];
+    setCustomerName(d.name);
+    setCustomerQuote(d.quote);
+    setCustomerRole(d.role);
+  }, [brandId]);
 
   return (
     <div className="space-y-6">
