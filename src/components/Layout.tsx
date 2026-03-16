@@ -12,7 +12,7 @@ export function Layout() {
   return (
     <div className="flex min-h-screen w-full bg-background overflow-x-hidden">
       <AppSidebar />
-      <div className="flex-1 flex flex-col min-h-screen min-w-0 w-full md:w-[calc(100%-64px)] lg:w-[calc(100%-220px)] overflow-x-hidden">
+      <div className="flex-1 flex flex-col min-h-screen min-w-0 w-full md:w-[calc(100%-64px)] lg:w-[calc(100%-220px)] overflow-x-clip">
         <TopBar />
         {showBrandBar && (
           <div className="relative">
