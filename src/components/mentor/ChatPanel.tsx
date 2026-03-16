@@ -192,7 +192,7 @@ export function ChatPanel({
             );
           })}
         </div>
-      </ScrollArea>
+      </div>
 
       {/* Input bar — sticky bottom */}
       <div className={cn(
