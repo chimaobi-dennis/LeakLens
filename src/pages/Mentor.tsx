@@ -140,7 +140,7 @@ const Mentor = () => {
       )}
 
       {/* Centre panel */}
-      <div className="flex-1 min-w-0 flex flex-col overflow-hidden relative">
+      <div className="flex-1 min-w-0 max-w-full flex flex-col overflow-hidden relative" style={{ boxSizing: "border-box" }}>
         {/* Mobile top bar with menu + right panel toggle */}
         {isMobile && (
           <div className="h-10 flex items-center px-3 gap-2 border-b border-border flex-shrink-0">
