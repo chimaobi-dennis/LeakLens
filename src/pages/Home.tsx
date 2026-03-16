@@ -159,10 +159,10 @@ const Home = () => {
             Tell me about your idea or your brand and we will figure out the rest together.
           </p>
           <div className="flex flex-col xs:flex-row gap-2.5 mt-1">
-            <Button className="bg-primary text-primary-foreground border-0 hover:bg-primary/90 w-full xs:w-auto">
+            <Button onClick={() => navigate("/mentor?mode=idea")} className="bg-primary text-primary-foreground border-0 hover:bg-primary/90 w-full xs:w-auto">
               I have an idea to explore
             </Button>
-            <Button variant="outline" className="bg-transparent border-[1.5px] border-primary text-primary hover:bg-primary/10 w-full xs:w-auto">
+            <Button onClick={() => navigate("/mentor?mode=brand")} variant="outline" className="bg-transparent border-[1.5px] border-primary text-primary hover:bg-primary/10 w-full xs:w-auto">
               I already have a brand
             </Button>
           </div>
