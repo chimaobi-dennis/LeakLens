@@ -59,8 +59,19 @@ const CampaignKit = () => {
     <div className="flex flex-col min-h-0 flex-1">
       {/* Scrollable content */}
       <div className="flex-1 overflow-y-auto overflow-x-hidden">
-        {state === "brief" ? (
+        {state === "home" ? (
+          <CampaignHome
+            onNewCampaign={() => setState("brief")}
+            onViewCampaign={() => setState("results")}
+          />
+        ) : state === "brief" ? (
           <div className="max-w-3xl mx-auto px-4 md:px-6 py-6">
+            <button
+              onClick={() => setState("home")}
+              className="flex items-center gap-1.5 text-[12px] font-ui text-muted-foreground hover:text-foreground mb-4 transition-colors"
+            >
+              <ArrowLeft size={14} /> Cancel
+            </button>
             <AssetPicker
               assets={assets}
               selectedId={selectedAsset}
