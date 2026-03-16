@@ -86,9 +86,9 @@ export function ChatPanel({
       </div>
 
       {/* Chat messages — only scrollable region */}
-      <ScrollArea className="flex-1 min-h-0 min-w-0 max-w-full" ref={scrollAreaRef}>
+      <ScrollArea className="flex-1 min-h-0 min-w-0 max-w-full w-full overflow-x-hidden" ref={scrollAreaRef}>
         <div className={cn(
-          "max-w-3xl mx-auto px-4 py-6 space-y-1 w-full",
+          "max-w-3xl mx-auto px-4 py-6 space-y-1 w-full overflow-x-hidden",
           isMobile && "pb-16"
         )} style={{ overflowWrap: "break-word", wordWrap: "break-word", maxWidth: "100%", overflowX: "hidden", boxSizing: "border-box" }}>
           <p className="text-[11px] font-ui text-muted-foreground text-center py-3">Today at 14:23</p>
@@ -133,13 +133,12 @@ export function ChatPanel({
                 )}
 
                 {/* Message bubble */}
-                <div className={cn("flex mb-3 w-full max-w-full overflow-hidden", msg.role === "founder" ? "justify-end" : "justify-start")} style={{ minWidth: 0, boxSizing: "border-box" }}>
+                <div className={cn("w-full flex overflow-hidden mb-3", msg.role === "founder" ? "justify-end" : "justify-start")} style={{ minWidth: 0, boxSizing: "border-box" }}>
                   <div
                     className={cn(
-                      "rounded-xl px-4 py-3",
-                      "max-w-[90%] md:max-w-[85%] lg:max-w-[75%]",
+                      "rounded-xl px-4 py-3 max-w-[75%] min-w-0 break-words",
                       msg.role === "founder"
-                        ? "bg-primary/10"
+                        ? "bg-primary/10 ml-auto"
                         : "bg-card border border-border"
                     )}
                     style={{ overflowWrap: "break-word", wordWrap: "break-word", wordBreak: "break-word", minWidth: 0, flexShrink: 1, boxSizing: "border-box" }}
@@ -155,24 +154,24 @@ export function ChatPanel({
 
                 {/* Inline save prompt */}
                 {prompt && !isDismissed && !isSaved && (
-                  <div className="flex justify-start mb-3 w-full max-w-full overflow-hidden" style={{ boxSizing: "border-box" }}>
+                  <div className="w-full flex items-center gap-2 overflow-hidden mb-3" style={{ boxSizing: "border-box" }}>
                     <div className={cn(
                       "flex items-center gap-2 h-9 px-3 rounded-lg border border-border bg-card/80",
                       isMobile ? "w-full" : "max-w-[75%]"
                     )} style={{ minWidth: 0, boxSizing: "border-box" }}>
                       <Save size={13} className="text-primary flex-shrink-0" />
-                      <span className="text-[12px] font-ui text-foreground min-w-0 flex-1" style={{ overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>{prompt.label}</span>
+                      <span className="text-[12px] font-ui text-foreground flex-1 min-w-0 truncate">{prompt.label}</span>
                       <button
                         onClick={() => handleSave(prompt)}
-                        className="h-6 px-2.5 rounded-md bg-primary text-primary-foreground text-[11px] font-ui font-semibold hover:bg-primary/90 transition-colors"
-                        style={{ flexShrink: 0, whiteSpace: "nowrap" }}
+                        className="h-6 px-2.5 rounded-md bg-primary text-primary-foreground text-[11px] font-ui font-semibold hover:bg-primary/90 transition-colors flex-shrink-0"
+                        style={{ whiteSpace: "nowrap" }}
                       >
                         Save
                       </button>
                       <button
                         onClick={() => handleDismiss(msg.id)}
-                        className="text-[11px] font-ui text-muted-foreground hover:text-foreground transition-colors"
-                        style={{ flexShrink: 0, whiteSpace: "nowrap" }}
+                        className="text-[11px] font-ui text-muted-foreground hover:text-foreground transition-colors flex-shrink-0"
+                        style={{ whiteSpace: "nowrap" }}
                       >
                         Dismiss
                       </button>
