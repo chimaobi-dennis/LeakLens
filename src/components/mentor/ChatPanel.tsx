@@ -73,7 +73,7 @@ export function ChatPanel({
   const promptsByMessage = Object.fromEntries(savePrompts.map(sp => [sp.afterMessageId, sp]));
 
   return (
-    <div className="flex-1 min-h-0 min-w-0 flex flex-col overflow-hidden">
+    <div className="flex-1 min-h-0 min-w-0 flex flex-col overflow-hidden max-w-full" style={{ boxSizing: "border-box" }}>
       {/* Brand context bar */}
       <div className="h-10 flex items-center gap-3 px-4 bg-muted/20 border-b border-border flex-shrink-0 min-w-0">
         <div className="flex items-center gap-1.5 min-w-0">
