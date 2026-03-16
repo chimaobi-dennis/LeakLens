@@ -193,6 +193,19 @@ export function ChatPanel({
               </div>
             );
           })}
+
+          {/* Typing indicator */}
+          {isTyping && (
+            <div className="w-full flex justify-start mb-3">
+              <div className="rounded-xl px-4 py-3 bg-card border border-border max-w-[75%] min-w-0">
+                <div className="flex items-center gap-1.5">
+                  <span className="w-2 h-2 rounded-full bg-muted-foreground/60 animate-bounce" style={{ animationDelay: "0ms" }} />
+                  <span className="w-2 h-2 rounded-full bg-muted-foreground/60 animate-bounce" style={{ animationDelay: "150ms" }} />
+                  <span className="w-2 h-2 rounded-full bg-muted-foreground/60 animate-bounce" style={{ animationDelay: "300ms" }} />
+                </div>
+              </div>
+            </div>
+          )}
         </div>
       </div>
 
