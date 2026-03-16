@@ -86,11 +86,11 @@ export function ChatPanel({
       </div>
 
       {/* Chat messages — only scrollable region */}
-      <ScrollArea className="flex-1 min-h-0 min-w-0" ref={scrollAreaRef}>
+      <ScrollArea className="flex-1 min-h-0 min-w-0 max-w-full" ref={scrollAreaRef}>
         <div className={cn(
-          "max-w-3xl mx-auto px-4 py-6 space-y-1",
+          "max-w-3xl mx-auto px-4 py-6 space-y-1 w-full",
           isMobile && "pb-16"
-        )} style={{ overflowWrap: "break-word", wordWrap: "break-word" }}>
+        )} style={{ overflowWrap: "break-word", wordWrap: "break-word", maxWidth: "100%", overflowX: "hidden", boxSizing: "border-box" }}>
           <p className="text-[11px] font-ui text-muted-foreground text-center py-3">Today at 14:23</p>
 
           {messages.map((msg, i) => {
