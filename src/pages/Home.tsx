@@ -167,8 +167,8 @@ const Home = () => {
           </div>
         </div>
 
-        {/* Chat preview */}
-        <div className="lg:col-span-2 hidden lg:flex flex-col">
+        {/* Chat preview — stacks below on mobile/tablet, side-by-side on desktop */}
+        <div className="col-span-1 lg:col-span-2 flex flex-col">
           <div className="rounded-xl border-[0.5px] border-card-border bg-card overflow-hidden shadow-lg dark:shadow-primary/5 shadow-black/5">
             <div className="px-5 py-3 border-b border-border flex items-center gap-2">
               <div className="w-2 h-2 rounded-full bg-primary animate-amber-pulse" />
