@@ -110,7 +110,7 @@ const Mentor = () => {
   const showRightInline = !isMobile && !isTablet;
 
   return (
-    <div className="flex-1 min-h-0 flex flex-row overflow-hidden">
+    <div className="flex-1 min-h-0 flex flex-row overflow-hidden w-full max-w-full" style={{ minWidth: 0 }}>
       {/* Left panel */}
       {showLeftInline ? (
         <aside className="w-60 flex-shrink-0 min-w-0 border-r border-border bg-card/50 overflow-hidden">

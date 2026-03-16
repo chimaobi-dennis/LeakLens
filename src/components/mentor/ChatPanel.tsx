@@ -155,22 +155,24 @@ export function ChatPanel({
 
                 {/* Inline save prompt */}
                 {prompt && !isDismissed && !isSaved && (
-                  <div className="flex justify-start mb-3 min-w-0">
+                  <div className="flex justify-start mb-3 w-full max-w-full overflow-hidden" style={{ boxSizing: "border-box" }}>
                     <div className={cn(
-                      "flex items-center gap-2 h-9 px-3 rounded-lg border border-border bg-card/80 min-w-0",
+                      "flex items-center gap-2 h-9 px-3 rounded-lg border border-border bg-card/80",
                       isMobile ? "w-full" : "max-w-[75%]"
-                    )}>
+                    )} style={{ minWidth: 0, boxSizing: "border-box" }}>
                       <Save size={13} className="text-primary flex-shrink-0" />
-                      <span className="text-[12px] font-ui text-foreground truncate min-w-0 flex-1">{prompt.label}</span>
+                      <span className="text-[12px] font-ui text-foreground min-w-0 flex-1" style={{ overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>{prompt.label}</span>
                       <button
                         onClick={() => handleSave(prompt)}
-                        className="h-6 px-2.5 rounded-md bg-primary text-primary-foreground text-[11px] font-ui font-semibold hover:bg-primary/90 transition-colors flex-shrink-0"
+                        className="h-6 px-2.5 rounded-md bg-primary text-primary-foreground text-[11px] font-ui font-semibold hover:bg-primary/90 transition-colors"
+                        style={{ flexShrink: 0, whiteSpace: "nowrap" }}
                       >
                         Save
                       </button>
                       <button
                         onClick={() => handleDismiss(msg.id)}
-                        className="text-[11px] font-ui text-muted-foreground hover:text-foreground transition-colors flex-shrink-0"
+                        className="text-[11px] font-ui text-muted-foreground hover:text-foreground transition-colors"
+                        style={{ flexShrink: 0, whiteSpace: "nowrap" }}
                       >
                         Dismiss
                       </button>
