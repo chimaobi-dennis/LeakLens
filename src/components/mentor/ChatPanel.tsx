@@ -1,6 +1,6 @@
 import { Send, Paperclip, Mic, Flag, Save, Check, X } from "lucide-react";
 import { useState, useRef, useEffect, useCallback } from "react";
-import { ScrollArea } from "@/components/ui/scroll-area";
+
 import { cn } from "@/lib/utils";
 import { MentorBrand, Message, InlineSavePrompt, MilestoneMarker, Milestone, categoryTextColors } from "./types";
 
@@ -86,11 +86,11 @@ export function ChatPanel({
       </div>
 
       {/* Chat messages — only scrollable region */}
-      <ScrollArea className="flex-1 min-h-0 min-w-0 max-w-full w-full overflow-x-hidden" ref={scrollAreaRef}>
+      <div className={cn("flex-1 min-h-0 w-full overflow-y-auto overflow-x-hidden")} ref={scrollAreaRef} style={{ minWidth: 0 }}>
         <div className={cn(
-          "max-w-3xl mx-auto px-4 py-6 space-y-1 w-full overflow-x-hidden",
+          "px-4 py-6 space-y-1 w-full",
           isMobile && "pb-16"
-        )} style={{ overflowWrap: "break-word", wordWrap: "break-word", maxWidth: "100%", overflowX: "hidden", boxSizing: "border-box" }}>
+        )} style={{ maxWidth: "100%", overflowX: "hidden", boxSizing: "border-box" }}>
           <p className="text-[11px] font-ui text-muted-foreground text-center py-3">Today at 14:23</p>
 
           {messages.map((msg, i) => {
@@ -192,14 +192,14 @@ export function ChatPanel({
             );
           })}
         </div>
-      </ScrollArea>
+      </div>
 
       {/* Input bar — sticky bottom */}
       <div className={cn(
         "flex-shrink-0 border-t border-border bg-card/50 z-10",
         isMobile && "pb-14"
       )}>
-        <div className="max-w-3xl mx-auto flex items-center gap-2 px-4 py-2">
+        <div className="w-full flex items-center gap-2 px-4 py-2" style={{ maxWidth: "100%", boxSizing: "border-box" }}>
           <button className="w-9 h-9 rounded-lg flex items-center justify-center text-muted-foreground hover:text-foreground hover:bg-muted/50 transition-colors flex-shrink-0">
             <Paperclip size={18} />
           </button>
