@@ -42,7 +42,6 @@ const Mentor = () => {
   const [brands, setBrands] = useState<MentorBrand[]>(allBrands);
   const [activeBrandId, setActiveBrandId] = useState("roast");
 
-  // Per-brand data store
   const [brandDataMap, setBrandDataMap] = useState<Record<string, BrandData>>({
     roast: roastData,
     lagos: lagosData,
@@ -111,10 +110,10 @@ const Mentor = () => {
   const showRightInline = !isMobile && !isTablet;
 
   return (
-    <div className="flex-1 min-h-0 flex overflow-hidden">
+    <div className="flex-1 min-h-0 flex flex-row overflow-hidden">
       {/* Left panel */}
       {showLeftInline ? (
-        <aside className="w-60 flex-shrink-0 border-r border-border bg-card/50 overflow-hidden">
+        <aside className="w-60 flex-shrink-0 min-w-0 border-r border-border bg-card/50 overflow-hidden">
           <BrandMilestonePanel
             brands={brands}
             activeBrand={activeBrand}
@@ -142,15 +141,23 @@ const Mentor = () => {
 
       {/* Centre panel */}
       <div className="flex-1 min-w-0 flex flex-col overflow-hidden relative">
+        {/* Mobile top bar with menu + right panel toggle */}
         {isMobile && (
           <div className="h-10 flex items-center px-3 gap-2 border-b border-border flex-shrink-0">
             <button onClick={() => setLeftOpen(true)} className="w-8 h-8 rounded-lg flex items-center justify-center text-muted-foreground hover:text-foreground hover:bg-muted/50 transition-colors">
               <Menu size={18} />
             </button>
             <span className="text-[13px] font-ui text-foreground flex-1">Mentor</span>
+            <button
+              onClick={() => setRightOpen(!rightOpen)}
+              className="w-8 h-8 rounded-lg flex items-center justify-center text-muted-foreground hover:text-foreground hover:bg-muted/50 transition-colors"
+            >
+              {rightOpen ? <PanelRightClose size={18} /> : <PanelRightOpen size={18} />}
+            </button>
           </div>
         )}
 
+        {/* Tablet right panel toggle */}
         {isTablet && !isMobile && (
           <button
             onClick={() => setRightOpen(!rightOpen)}
@@ -170,30 +177,29 @@ const Mentor = () => {
             onSaveDNA={handleSaveDNA}
             scrollToMilestoneId={scrollToMilestoneId}
             onMilestoneScrolled={handleMilestoneScrolled}
+            isMobile={isMobile}
           />
         )}
       </div>
 
       {/* Right panel */}
       {showRightInline ? (
-        <aside className="w-[280px] flex-shrink-0 border-l border-border bg-card/50 overflow-hidden">
+        <aside className="w-[280px] flex-shrink-0 min-w-0 border-l border-border bg-card/50 overflow-hidden">
           <BrandDNAPanel
             fields={activeBrandData?.dnaFields || emptyDNAFields}
             highlightField={highlightDNAField}
           />
         </aside>
       ) : (
-        !isMobile && (
-          <Sheet open={rightOpen} onOpenChange={setRightOpen}>
-            <SheetContent side="right" className="w-80 p-0">
-              <SheetTitle className="sr-only">Brand DNA</SheetTitle>
-              <BrandDNAPanel
-                fields={activeBrandData?.dnaFields || emptyDNAFields}
-                highlightField={highlightDNAField}
-              />
-            </SheetContent>
-          </Sheet>
-        )
+        <Sheet open={rightOpen} onOpenChange={setRightOpen}>
+          <SheetContent side="right" className="w-80 p-0">
+            <SheetTitle className="sr-only">Brand DNA</SheetTitle>
+            <BrandDNAPanel
+              fields={activeBrandData?.dnaFields || emptyDNAFields}
+              highlightField={highlightDNAField}
+            />
+          </SheetContent>
+        </Sheet>
       )}
     </div>
   );

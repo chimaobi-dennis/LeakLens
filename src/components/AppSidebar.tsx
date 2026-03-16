@@ -1,5 +1,6 @@
-import { Home, MessageCircle, Camera, Megaphone, Calendar, FileText, Film, Shield } from "lucide-react";
+import { Home, MessageCircle, Camera, Megaphone, Calendar, FileText, Film, Shield, ChevronLeft, ChevronRight } from "lucide-react";
 import { NavLink, useLocation } from "react-router-dom";
+import { useState, useEffect } from "react";
 import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip";
 
 const navItems = [
@@ -19,6 +20,17 @@ const secondaryItems = [
 export function AppSidebar() {
   const location = useLocation();
   const isActive = (path: string) => location.pathname === path;
+
+  const [collapsed, setCollapsed] = useState(() => {
+    if (typeof window !== "undefined") {
+      return localStorage.getItem("sidebar-collapsed") === "true";
+    }
+    return false;
+  });
+
+  useEffect(() => {
+    localStorage.setItem("sidebar-collapsed", String(collapsed));
+  }, [collapsed]);
 
   const renderNavItem = (item: typeof navItems[0], showLabel: boolean) => {
     const active = isActive(item.path);
@@ -69,17 +81,32 @@ export function AppSidebar() {
 
   return (
     <>
-      {/* ── Desktop sidebar (>1024px): full 220px ── */}
-      <aside className="hidden lg:flex z-40 h-full w-[220px] flex-col bg-sidebar border-r border-transparent relative flex-shrink-0">
+      {/* ── Desktop sidebar (>1024px): collapsible ── */}
+      <aside
+        className={`hidden lg:flex z-40 h-full flex-col bg-sidebar border-r border-transparent relative flex-shrink-0 transition-all duration-200 ease-in-out ${collapsed ? "w-16" : "w-[220px]"}`}
+      >
         <div className="absolute top-0 right-0 w-px h-full bg-gradient-to-b from-transparent via-primary/40 to-transparent" />
-        <nav className="flex-1 pt-6 px-2 space-y-1">
-          {navItems.map((item) => renderNavItem(item, true))}
+        {/* Collapse toggle */}
+        <button
+          onClick={() => setCollapsed(!collapsed)}
+          className="absolute top-3 right-2 z-10 w-6 h-6 rounded-md flex items-center justify-center text-muted-foreground hover:text-foreground hover:bg-muted/50 transition-colors"
+        >
+          {collapsed ? <ChevronRight size={14} /> : <ChevronLeft size={14} />}
+        </button>
+        <nav className="flex-1 pt-10 px-2 space-y-1">
+          {collapsed
+            ? navItems.map((item) => renderTooltipItem(item))
+            : navItems.map((item) => renderNavItem(item, true))
+          }
           <div className="mx-3 my-2 border-t border-border" />
-          {secondaryItems.map((item) => renderNavItem(item, true))}
+          {collapsed
+            ? secondaryItems.map((item) => renderTooltipItem(item))
+            : secondaryItems.map((item) => renderNavItem(item, true))
+          }
         </nav>
-        <div className="px-4 py-4 border-t border-border flex items-center gap-3">
+        <div className={`px-4 py-4 border-t border-border flex items-center ${collapsed ? "justify-center" : "gap-3"}`}>
           <div className="w-8 h-8 rounded-full bg-primary flex items-center justify-center text-primary-foreground text-xs font-ui font-semibold flex-shrink-0">CK</div>
-          <span className="text-muted-foreground text-[13px] font-ui">Chimaobi K.</span>
+          {!collapsed && <span className="text-muted-foreground text-[13px] font-ui">Chimaobi K.</span>}
         </div>
       </aside>
 
