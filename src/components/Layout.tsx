@@ -10,16 +10,22 @@ export function Layout() {
   const showBrandBar = modulePaths.includes(location.pathname);
 
   return (
-    <div className="flex min-h-screen w-full bg-background overflow-x-hidden">
-      <AppSidebar />
-      <div className="flex-1 flex flex-col min-h-screen min-w-0 w-full md:w-[calc(100%-64px)] lg:w-[calc(100%-220px)] overflow-x-clip">
-        <TopBar />
-        {showBrandBar && (
-          <div className="relative">
-            <BrandContextBar />
-          </div>
-        )}
-        <main className="flex-1 pb-16 md:pb-0 overflow-x-hidden">
+    <div className="h-screen flex flex-col overflow-hidden bg-background">
+      {/* Top bar — fixed, never scrolls */}
+      <TopBar />
+
+      {/* Body row — fills remaining height */}
+      <div className="flex-1 flex overflow-hidden">
+        {/* Sidebar — fixed height, never scrolls (hidden on mobile) */}
+        <AppSidebar />
+
+        {/* Main content — the ONLY scrollable region */}
+        <main className="flex-1 min-w-0 overflow-y-auto overflow-x-hidden pb-16 md:pb-0">
+          {showBrandBar && (
+            <div className="relative">
+              <BrandContextBar />
+            </div>
+          )}
           <Outlet />
         </main>
       </div>
