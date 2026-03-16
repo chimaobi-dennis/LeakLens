@@ -70,7 +70,7 @@ export function AppSidebar() {
   return (
     <>
       {/* ── Desktop sidebar (>1024px): full 220px ── */}
-      <aside className="hidden lg:flex sticky top-0 left-0 z-40 h-screen w-[220px] flex-col bg-sidebar border-r border-transparent relative flex-shrink-0">
+      <aside className="hidden lg:flex z-40 h-full w-[220px] flex-col bg-sidebar border-r border-transparent relative flex-shrink-0">
         <div className="absolute top-0 right-0 w-px h-full bg-gradient-to-b from-transparent via-primary/40 to-transparent" />
         <nav className="flex-1 pt-6 px-2 space-y-1">
           {navItems.map((item) => renderNavItem(item, true))}
