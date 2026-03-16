@@ -86,7 +86,7 @@ export function ChatPanel({
       </div>
 
       {/* Chat messages — only scrollable region */}
-      <ScrollArea className="flex-1 min-h-0 min-w-0 w-full overflow-hidden" ref={scrollAreaRef}>
+      <div className={cn("flex-1 min-h-0 w-full overflow-y-auto overflow-x-hidden")} ref={scrollAreaRef} style={{ minWidth: 0 }}>
         <div className={cn(
           "px-4 py-6 space-y-1 w-full",
           isMobile && "pb-16"
