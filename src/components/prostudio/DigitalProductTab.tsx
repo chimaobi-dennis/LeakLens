@@ -47,6 +47,7 @@ export function DigitalProductTab({ brandId }: Props) {
   const [customerName, setCustomerName] = useState(defaults.name);
   const [customerQuote, setCustomerQuote] = useState(defaults.quote);
   const [customerRole, setCustomerRole] = useState(defaults.role);
+  const [rating, setRating] = useState(4);
 
   const currentDefaults = brandDefaults[brandId] || brandDefaults["1"];
 
