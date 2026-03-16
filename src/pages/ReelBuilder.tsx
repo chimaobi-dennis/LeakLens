@@ -10,8 +10,12 @@ const ReelBuilder = () => {
   const { activeBrand } = useBrand();
   const [state, setState] = useState<"home" | "brief" | "storyboard">("home");
   const [loading, setLoading] = useState(false);
+  const [briefPrefill, setBriefPrefill] = useState<{ topic?: string; tone?: string }>({});
 
-  const handleNewReel = () => setState("brief");
+  const handleNewReel = () => {
+    setBriefPrefill({});
+    setState("brief");
+  };
 
   const handleOpenRecent = () => setState("storyboard");
 
@@ -23,6 +27,11 @@ const ReelBuilder = () => {
     }, 1500);
   };
 
+  const handleUseTemplate = (topic: string, tone: string) => {
+    setBriefPrefill({ topic, tone });
+    setState("brief");
+  };
+
   return (
     <div className="flex flex-col min-h-0 flex-1">
       <div className="flex-1 overflow-y-auto overflow-x-hidden">
@@ -31,12 +40,15 @@ const ReelBuilder = () => {
             brandName={activeBrand?.name || "Roast & Co"}
             onNewReel={handleNewReel}
             onOpenRecent={handleOpenRecent}
+            onUseTemplate={handleUseTemplate}
           />
         ) : state === "brief" ? (
           <ReelBrief
             onBack={() => setState("home")}
             onBuild={handleBuild}
             loading={loading}
+            initialTopic={briefPrefill.topic}
+            initialTone={briefPrefill.tone}
           />
         ) : (
           <ReelStoryboard
