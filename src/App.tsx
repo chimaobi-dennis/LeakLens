@@ -8,7 +8,7 @@ import { BrandProvider } from "@/hooks/use-brand";
 import { Layout } from "./components/Layout";
 import Home from "./pages/Home";
 import Mentor from "./pages/Mentor";
-import ModulePlaceholder from "./pages/ModulePlaceholder";
+
 import ReelBuilder from "./pages/ReelBuilder";
 import DocStudio from "./pages/DocStudio";
 import ContentCalendar from "./pages/ContentCalendar";
