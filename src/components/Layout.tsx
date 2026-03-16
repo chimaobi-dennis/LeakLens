@@ -9,19 +9,14 @@ const fullHeightPaths = ["/mentor"];
 export function Layout() {
   const location = useLocation();
   const showBrandBar = modulePaths.includes(location.pathname);
+  const isFullHeight = fullHeightPaths.includes(location.pathname);
 
   return (
     <div className="h-screen flex flex-col overflow-hidden bg-background">
-      {/* Top bar — fixed, never scrolls */}
       <TopBar />
-
-      {/* Body row — fills remaining height */}
       <div className="flex-1 flex overflow-hidden">
-        {/* Sidebar — fixed height, never scrolls (hidden on mobile) */}
         <AppSidebar />
-
-        {/* Main content — the ONLY scrollable region */}
-        <main className="flex-1 min-w-0 overflow-y-auto overflow-x-hidden pb-16 md:pb-0">
+        <main className={`flex-1 min-w-0 overflow-x-hidden pb-16 md:pb-0 ${isFullHeight ? "overflow-hidden flex flex-col" : "overflow-y-auto"}`}>
           {showBrandBar && (
             <div className="relative">
               <BrandContextBar />
