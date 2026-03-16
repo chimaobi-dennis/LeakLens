@@ -73,7 +73,7 @@ export function ChatPanel({
   const promptsByMessage = Object.fromEntries(savePrompts.map(sp => [sp.afterMessageId, sp]));
 
   return (
-    <div className="flex-1 min-h-0 min-w-0 flex flex-col overflow-hidden">
+    <div className="flex-1 min-h-0 min-w-0 flex flex-col overflow-hidden max-w-full" style={{ boxSizing: "border-box" }}>
       {/* Brand context bar */}
       <div className="h-10 flex items-center gap-3 px-4 bg-muted/20 border-b border-border flex-shrink-0 min-w-0">
         <div className="flex items-center gap-1.5 min-w-0">
@@ -86,11 +86,11 @@ export function ChatPanel({
       </div>
 
       {/* Chat messages — only scrollable region */}
-      <ScrollArea className="flex-1 min-h-0 min-w-0" ref={scrollAreaRef}>
+      <ScrollArea className="flex-1 min-h-0 min-w-0 max-w-full" ref={scrollAreaRef}>
         <div className={cn(
-          "max-w-3xl mx-auto px-4 py-6 space-y-1",
+          "max-w-3xl mx-auto px-4 py-6 space-y-1 w-full",
           isMobile && "pb-16"
-        )} style={{ overflowWrap: "break-word", wordWrap: "break-word" }}>
+        )} style={{ overflowWrap: "break-word", wordWrap: "break-word", maxWidth: "100%", overflowX: "hidden", boxSizing: "border-box" }}>
           <p className="text-[11px] font-ui text-muted-foreground text-center py-3">Today at 14:23</p>
 
           {messages.map((msg, i) => {
@@ -103,7 +103,7 @@ export function ChatPanel({
             const showTimestamp = i === 8;
 
             return (
-              <div key={msg.id} className="min-w-0">
+              <div key={msg.id} className="min-w-0 w-full max-w-full overflow-hidden" style={{ boxSizing: "border-box" }}>
                 {/* Milestone marker */}
                 {milestone && (
                   <div
@@ -133,16 +133,16 @@ export function ChatPanel({
                 )}
 
                 {/* Message bubble */}
-                <div className={cn("flex mb-3 min-w-0", msg.role === "founder" ? "justify-end" : "justify-start")}>
+                <div className={cn("flex mb-3 w-full max-w-full overflow-hidden", msg.role === "founder" ? "justify-end" : "justify-start")} style={{ minWidth: 0, boxSizing: "border-box" }}>
                   <div
                     className={cn(
-                      "rounded-xl px-4 py-3 min-w-0",
+                      "rounded-xl px-4 py-3",
                       "max-w-[90%] md:max-w-[85%] lg:max-w-[75%]",
                       msg.role === "founder"
                         ? "bg-primary/10"
                         : "bg-card border border-border"
                     )}
-                    style={{ overflowWrap: "break-word", wordWrap: "break-word" }}
+                    style={{ overflowWrap: "break-word", wordWrap: "break-word", wordBreak: "break-word", minWidth: 0, flexShrink: 1, boxSizing: "border-box" }}
                   >
                     <p
                       className="text-[13.5px] font-ui text-foreground whitespace-pre-line break-words"
@@ -155,22 +155,24 @@ export function ChatPanel({
 
                 {/* Inline save prompt */}
                 {prompt && !isDismissed && !isSaved && (
-                  <div className="flex justify-start mb-3 min-w-0">
+                  <div className="flex justify-start mb-3 w-full max-w-full overflow-hidden" style={{ boxSizing: "border-box" }}>
                     <div className={cn(
-                      "flex items-center gap-2 h-9 px-3 rounded-lg border border-border bg-card/80 min-w-0",
+                      "flex items-center gap-2 h-9 px-3 rounded-lg border border-border bg-card/80",
                       isMobile ? "w-full" : "max-w-[75%]"
-                    )}>
+                    )} style={{ minWidth: 0, boxSizing: "border-box" }}>
                       <Save size={13} className="text-primary flex-shrink-0" />
-                      <span className="text-[12px] font-ui text-foreground truncate min-w-0 flex-1">{prompt.label}</span>
+                      <span className="text-[12px] font-ui text-foreground min-w-0 flex-1" style={{ overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>{prompt.label}</span>
                       <button
                         onClick={() => handleSave(prompt)}
-                        className="h-6 px-2.5 rounded-md bg-primary text-primary-foreground text-[11px] font-ui font-semibold hover:bg-primary/90 transition-colors flex-shrink-0"
+                        className="h-6 px-2.5 rounded-md bg-primary text-primary-foreground text-[11px] font-ui font-semibold hover:bg-primary/90 transition-colors"
+                        style={{ flexShrink: 0, whiteSpace: "nowrap" }}
                       >
                         Save
                       </button>
                       <button
                         onClick={() => handleDismiss(msg.id)}
-                        className="text-[11px] font-ui text-muted-foreground hover:text-foreground transition-colors flex-shrink-0"
+                        className="text-[11px] font-ui text-muted-foreground hover:text-foreground transition-colors"
+                        style={{ flexShrink: 0, whiteSpace: "nowrap" }}
                       >
                         Dismiss
                       </button>

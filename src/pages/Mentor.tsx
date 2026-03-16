@@ -110,7 +110,7 @@ const Mentor = () => {
   const showRightInline = !isMobile && !isTablet;
 
   return (
-    <div className="flex-1 min-h-0 flex flex-row overflow-hidden">
+    <div className="flex-1 min-h-0 flex flex-row overflow-hidden w-full max-w-full" style={{ minWidth: 0 }}>
       {/* Left panel */}
       {showLeftInline ? (
         <aside className="w-60 flex-shrink-0 min-w-0 border-r border-border bg-card/50 overflow-hidden">
@@ -140,7 +140,7 @@ const Mentor = () => {
       )}
 
       {/* Centre panel */}
-      <div className="flex-1 min-w-0 flex flex-col overflow-hidden relative">
+      <div className="flex-1 min-w-0 max-w-full flex flex-col overflow-hidden relative" style={{ boxSizing: "border-box" }}>
         {/* Mobile top bar with menu + right panel toggle */}
         {isMobile && (
           <div className="h-10 flex items-center px-3 gap-2 border-b border-border flex-shrink-0">
