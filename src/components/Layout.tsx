@@ -3,7 +3,8 @@ import { AppSidebar } from "./AppSidebar";
 import { TopBar } from "./TopBar";
 import { BrandContextBar } from "./BrandContextBar";
 
-const modulePaths = ["/mentor", "/pro-studio", "/campaign-kit", "/content-calendar", "/doc-studio", "/reel-builder"];
+const modulePaths = ["/pro-studio", "/campaign-kit", "/content-calendar", "/doc-studio", "/reel-builder"];
+const fullHeightPaths = ["/mentor"];
 
 export function Layout() {
   const location = useLocation();
