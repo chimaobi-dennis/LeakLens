@@ -167,8 +167,8 @@ const Home = () => {
           </div>
         </div>
 
-        {/* Chat preview */}
-        <div className="lg:col-span-2 hidden lg:flex flex-col">
+        {/* Chat preview — stacks below on mobile/tablet, side-by-side on desktop */}
+        <div className="col-span-1 lg:col-span-2 flex flex-col">
           <div className="rounded-xl border-[0.5px] border-card-border bg-card overflow-hidden shadow-lg dark:shadow-primary/5 shadow-black/5">
             <div className="px-5 py-3 border-b border-border flex items-center gap-2">
               <div className="w-2 h-2 rounded-full bg-primary animate-amber-pulse" />
@@ -233,10 +233,10 @@ const Home = () => {
           <button className="font-ui text-[13px] text-primary hover:underline">View all</button>
         </div>
         <div className="hidden md:flex gap-4 overflow-x-auto pb-2 scrollbar-hide">
-          {recentAssets.map((asset, i) => <AssetCard key={i} asset={asset} />)}
+          {recentAssets.map((asset, i) => <AssetCard key={i} asset={asset} tablet />)}
         </div>
         <div className="grid grid-cols-2 gap-3 md:hidden">
-          {recentAssets.map((asset, i) => <AssetCard key={i} asset={asset} />)}
+          {recentAssets.map((asset, i) => <AssetCard key={i} asset={asset} mobile />)}
         </div>
       </section>
 
@@ -250,10 +250,10 @@ const Home = () => {
             const post = scheduledPosts[i];
             const PlatformIcon = post ? platformIcon[post.platform] : null;
             return (
-              <div key={i} className={`flex items-center gap-3 md:gap-4 px-3 md:px-4 py-2.5 md:py-3 rounded-lg transition-all duration-200 ${
+              <div key={i} className={`flex items-center gap-2 md:gap-4 px-3 md:px-4 py-2.5 md:py-3 rounded-lg transition-all duration-200 min-w-0 ${
                 post ? "bg-card border border-card-border hover:border-card-border-hover" : "border border-dashed border-border/50"
               }`}>
-                <span className="font-ui text-[12px] md:text-[13px] text-muted-foreground w-16 md:w-20 flex-shrink-0">
+                <span className="font-ui text-[11px] md:text-[13px] text-muted-foreground w-14 md:w-20 flex-shrink-0">
                   {dayName(d)} {dayDate(d)}
                 </span>
                 {post ? (
@@ -284,19 +284,20 @@ const Home = () => {
   );
 };
 
-function AssetCard({ asset }: { asset: { name: string; platform: string } }) {
+function AssetCard({ asset, mobile, tablet }: { asset: { name: string; platform: string }; mobile?: boolean; tablet?: boolean }) {
   return (
-    <div className="group relative flex-shrink-0 w-full md:w-[160px]">
-      <div className="relative w-full aspect-[4/3] md:h-[120px] md:aspect-auto rounded-lg bg-card border border-card-border overflow-hidden group-hover:border-card-border-hover transition-all duration-200">
+    <div className={`group relative flex-shrink-0 ${mobile ? "w-full" : tablet ? "w-[140px] lg:w-[160px]" : "w-[160px]"}`}>
+      <div className="relative w-full aspect-[4/3] rounded-lg bg-card border border-card-border overflow-hidden group-hover:border-card-border-hover transition-all duration-200">
         <div className="w-full h-full bg-gradient-to-br from-muted/40 to-muted/20 flex items-center justify-center">
           <Camera size={20} className="text-muted-foreground/40" />
         </div>
-        <div className="absolute inset-0 bg-background/70 opacity-0 group-hover:opacity-100 transition-opacity duration-200 flex items-center justify-center gap-3">
-          <button className="w-8 h-8 rounded-full bg-card border border-border flex items-center justify-center hover:border-primary transition-colors duration-200">
-            <Download size={14} className="text-foreground" />
+        {/* Hover overlay on desktop/tablet, always visible on mobile */}
+        <div className={`absolute bottom-1.5 right-1.5 flex gap-1.5 ${mobile ? "opacity-100" : "opacity-0 group-hover:opacity-100"} transition-opacity duration-200`}>
+          <button className="w-7 h-7 rounded-full bg-card/90 border border-border flex items-center justify-center hover:border-primary transition-colors duration-200">
+            <Download size={12} className="text-foreground" />
           </button>
-          <button className="w-8 h-8 rounded-full bg-card border border-border flex items-center justify-center hover:border-primary transition-colors duration-200">
-            <CalendarPlus size={14} className="text-foreground" />
+          <button className="w-7 h-7 rounded-full bg-card/90 border border-border flex items-center justify-center hover:border-primary transition-colors duration-200">
+            <CalendarPlus size={12} className="text-foreground" />
           </button>
         </div>
       </div>
