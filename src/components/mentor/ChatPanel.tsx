@@ -103,7 +103,7 @@ export function ChatPanel({
             const showTimestamp = i === 8;
 
             return (
-              <div key={msg.id} className="min-w-0">
+              <div key={msg.id} className="min-w-0 w-full max-w-full overflow-hidden" style={{ boxSizing: "border-box" }}>
                 {/* Milestone marker */}
                 {milestone && (
                   <div
