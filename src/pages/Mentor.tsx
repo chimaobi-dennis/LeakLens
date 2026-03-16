@@ -29,7 +29,7 @@ const Mentor = () => {
   const showRightInline = !isMobile && !isTablet;
 
   return (
-    <div className="h-full flex overflow-hidden">
+    <div className="flex-1 min-h-0 flex overflow-hidden">
       {/* Left panel — inline on desktop/tablet, drawer on mobile */}
       {showLeftInline ? (
         <aside className="w-60 flex-shrink-0 border-r border-border bg-card/50 overflow-hidden">
