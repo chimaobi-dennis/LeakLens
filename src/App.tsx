@@ -9,6 +9,7 @@ import { Layout } from "./components/Layout";
 import Home from "./pages/Home";
 import Mentor from "./pages/Mentor";
 import ModulePlaceholder from "./pages/ModulePlaceholder";
+import ContentCalendar from "./pages/ContentCalendar";
 import ProStudio from "./pages/ProStudio";
 import CampaignKit from "./pages/CampaignKit";
 import NotFound from "./pages/NotFound";
@@ -29,7 +30,7 @@ const App = () => (
                 <Route path="/mentor" element={<Mentor />} />
                 <Route path="/pro-studio" element={<ProStudio />} />
                 <Route path="/campaign-kit" element={<CampaignKit />} />
-                <Route path="/content-calendar" element={<ModulePlaceholder name="ContentCalendar" />} />
+                <Route path="/content-calendar" element={<ContentCalendar />} />
                 <Route path="/doc-studio" element={<ModulePlaceholder name="DocStudio" />} />
                 <Route path="/reel-builder" element={<ModulePlaceholder name="ReelBuilder" />} />
                 <Route path="/brand-dna" element={<ModulePlaceholder name="Brand DNA" />} />
