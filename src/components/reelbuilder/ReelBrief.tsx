@@ -9,14 +9,16 @@ interface Props {
   onBack: () => void;
   onBuild: () => void;
   loading: boolean;
+  initialTopic?: string;
+  initialTone?: string;
 }
 
-export function ReelBrief({ onBack, onBuild, loading }: Props) {
-  const [topic, setTopic] = useState("Roast & Co origin story — why we built this");
+export function ReelBrief({ onBack, onBuild, loading, initialTopic, initialTone }: Props) {
+  const [topic, setTopic] = useState(initialTopic || "Roast & Co origin story — why we built this");
   const [platform, setPlatform] = useState("Instagram Reels");
   const [length, setLength] = useState("60 seconds");
   const [goal, setGoal] = useState("Tell origin story");
-  const [tone, setTone] = useState("Warm and personal");
+  const [tone, setTone] = useState(initialTone || "Warm and personal");
   const [keyMessage, setKeyMessage] = useState("We built the coffee Lagos deserved — for people who moved back and refused to compromise");
 
   return (
