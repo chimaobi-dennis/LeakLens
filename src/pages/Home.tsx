@@ -250,10 +250,10 @@ const Home = () => {
             const post = scheduledPosts[i];
             const PlatformIcon = post ? platformIcon[post.platform] : null;
             return (
-              <div key={i} className={`flex items-center gap-3 md:gap-4 px-3 md:px-4 py-2.5 md:py-3 rounded-lg transition-all duration-200 ${
+              <div key={i} className={`flex items-center gap-2 md:gap-4 px-3 md:px-4 py-2.5 md:py-3 rounded-lg transition-all duration-200 min-w-0 ${
                 post ? "bg-card border border-card-border hover:border-card-border-hover" : "border border-dashed border-border/50"
               }`}>
-                <span className="font-ui text-[12px] md:text-[13px] text-muted-foreground w-16 md:w-20 flex-shrink-0">
+                <span className="font-ui text-[11px] md:text-[13px] text-muted-foreground w-14 md:w-20 flex-shrink-0">
                   {dayName(d)} {dayDate(d)}
                 </span>
                 {post ? (

@@ -47,13 +47,13 @@ export function TopBar() {
 
       {/* Right — actions */}
       <div className="flex items-center gap-2 md:gap-3">
-        {/* Guide */}
-        <button className="w-9 h-9 rounded-lg flex items-center justify-center text-muted-foreground hover:text-foreground hover:bg-muted/50 transition-all duration-200">
+        {/* Guide — hidden on mobile */}
+        <button className="hidden md:flex w-9 h-9 rounded-lg items-center justify-center text-muted-foreground hover:text-foreground hover:bg-muted/50 transition-all duration-200">
           <HelpCircle size={18} />
         </button>
 
-        {/* Feedback */}
-        <button className="w-9 h-9 rounded-lg flex items-center justify-center text-muted-foreground hover:text-foreground hover:bg-muted/50 transition-all duration-200">
+        {/* Feedback — hidden on mobile */}
+        <button className="hidden md:flex w-9 h-9 rounded-lg items-center justify-center text-muted-foreground hover:text-foreground hover:bg-muted/50 transition-all duration-200">
           <MessageSquarePlus size={18} />
         </button>
 
