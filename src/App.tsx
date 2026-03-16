@@ -33,7 +33,7 @@ const App = () => (
                 <Route path="/campaign-kit" element={<CampaignKit />} />
                 <Route path="/content-calendar" element={<ContentCalendar />} />
                 <Route path="/doc-studio" element={<DocStudio />} />
-                <Route path="/reel-builder" element={<ModulePlaceholder name="ReelBuilder" />} />
+                <Route path="/reel-builder" element={<ReelBuilder />} />
                 <Route path="/brand-dna" element={<ModulePlaceholder name="Brand DNA" />} />
               </Route>
               <Route path="*" element={<NotFound />} />
