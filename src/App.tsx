@@ -29,7 +29,7 @@ const App = () => (
                 <Route path="/mentor" element={<Mentor />} />
                 <Route path="/pro-studio" element={<ProStudio />} />
                 <Route path="/campaign-kit" element={<CampaignKit />} />
-                <Route path="/content-calendar" element={<ModulePlaceholder name="ContentCalendar" />} />
+                <Route path="/content-calendar" element={<ContentCalendar />} />
                 <Route path="/doc-studio" element={<ModulePlaceholder name="DocStudio" />} />
                 <Route path="/reel-builder" element={<ModulePlaceholder name="ReelBuilder" />} />
                 <Route path="/brand-dna" element={<ModulePlaceholder name="Brand DNA" />} />
