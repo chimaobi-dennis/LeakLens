@@ -8,12 +8,13 @@ import { BrandProvider } from "@/hooks/use-brand";
 import { Layout } from "./components/Layout";
 import Home from "./pages/Home";
 import Mentor from "./pages/Mentor";
-import ModulePlaceholder from "./pages/ModulePlaceholder";
+
 import ReelBuilder from "./pages/ReelBuilder";
 import DocStudio from "./pages/DocStudio";
 import ContentCalendar from "./pages/ContentCalendar";
 import ProStudio from "./pages/ProStudio";
 import CampaignKit from "./pages/CampaignKit";
+import BrandDNA from "./pages/BrandDNA";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -35,7 +36,7 @@ const App = () => (
                 <Route path="/content-calendar" element={<ContentCalendar />} />
                 <Route path="/doc-studio" element={<DocStudio />} />
                 <Route path="/reel-builder" element={<ReelBuilder />} />
-                <Route path="/brand-dna" element={<ModulePlaceholder name="Brand DNA" />} />
+                <Route path="/brand-dna" element={<BrandDNA />} />
               </Route>
               <Route path="*" element={<NotFound />} />
             </Routes>
