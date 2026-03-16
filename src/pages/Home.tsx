@@ -4,7 +4,7 @@ import {
   Download, CalendarPlus, Instagram, Facebook, Twitter,
   ArrowRight, Clock, Plus, Send
 } from "lucide-react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useEffect, useRef } from "react";
 
 const mockChat = [
