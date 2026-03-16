@@ -9,6 +9,7 @@ import { Layout } from "./components/Layout";
 import Home from "./pages/Home";
 import Mentor from "./pages/Mentor";
 import ModulePlaceholder from "./pages/ModulePlaceholder";
+import ProStudio from "./pages/ProStudio";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
