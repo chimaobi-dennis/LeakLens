@@ -10,6 +10,7 @@ import Home from "./pages/Home";
 import Mentor from "./pages/Mentor";
 import ModulePlaceholder from "./pages/ModulePlaceholder";
 import ProStudio from "./pages/ProStudio";
+import CampaignKit from "./pages/CampaignKit";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
