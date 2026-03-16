@@ -227,7 +227,7 @@ const Home = () => {
       </section>
 
       {/* ── Recent assets ── */}
-      <section className="px-4 md:px-6 pb-8 md:pb-12 max-w-[1200px] mx-auto">
+      <section className="px-4 md:px-6 pb-8 md:pb-12 max-w-full lg:max-w-[1200px] mx-auto">
         <div className="flex items-center justify-between mb-5">
           <h2 className="font-ui text-[11px] uppercase tracking-[0.1em] text-muted-foreground">Recent assets</h2>
           <button className="font-ui text-[13px] text-primary hover:underline">View all</button>
