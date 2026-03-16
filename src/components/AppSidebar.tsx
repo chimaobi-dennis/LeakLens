@@ -78,8 +78,8 @@ export function AppSidebar() {
           {secondaryItems.map((item) => renderNavItem(item, true))}
         </nav>
         <div className="px-4 py-4 border-t border-border flex items-center gap-3">
-          <div className="w-8 h-8 rounded-full bg-primary flex items-center justify-center text-primary-foreground text-xs font-ui font-semibold flex-shrink-0">RC</div>
-          <span className="text-muted-foreground text-[13px] font-ui">Roast & Co</span>
+          <div className="w-8 h-8 rounded-full bg-primary flex items-center justify-center text-primary-foreground text-xs font-ui font-semibold flex-shrink-0">CK</div>
+          <span className="text-muted-foreground text-[13px] font-ui">Chimaobi K.</span>
         </div>
       </aside>
 
