@@ -17,9 +17,9 @@ interface CampaignSummary {
 const campaigns: CampaignSummary[] = [
   {
     id: "c1",
-    name: "Lagos Launch — First Purchase Drive",
+    name: "Stockholm Launch — First Purchase Drive",
     goalTone: "Drive first purchase · Confident and warm",
-    assetColor: "#C8951A",
+    assetColor: "#2D4A3E",
     platforms: [
       { color: "#E1306C" },
       { color: "#4267B2" },
@@ -35,22 +35,22 @@ const campaigns: CampaignSummary[] = [
   {
     id: "c2",
     name: "Social Proof — Brand Awareness",
-    goalTone: "Build awareness · Warm and considered",
-    assetColor: "#1A2A4A",
+    goalTone: "Build awareness · Minimal and considered",
+    assetColor: "#1A2A3A",
     platforms: [
       { color: "#E1306C" },
       { color: "#4267B2" },
       { color: "#1DA1F2" },
     ],
     status: "Scheduled",
-    statusBg: "rgba(58, 42, 0, 0.8)",
-    statusColor: "#D4A017",
+    statusBg: "rgba(45, 74, 62, 0.3)",
+    statusColor: "#2D4A3E",
     creatives: "6 creatives",
     date: "Created 2 weeks ago",
   },
   {
     id: "c3",
-    name: "Product Feature — Signature Blend",
+    name: "Product Feature — Daily Stack",
     goalTone: "Launch product · Bold and direct",
     assetColor: "#1A3A38",
     platforms: [
@@ -82,7 +82,6 @@ export function CampaignHome({ onNewCampaign, onViewCampaign }: Props) {
 
   return (
     <div className="max-w-4xl mx-auto px-4 md:px-6 py-6">
-      {/* Header */}
       <div className="flex items-start justify-between mb-8">
         <div>
           <h1 className="font-display text-2xl text-foreground">Campaigns</h1>
@@ -99,7 +98,6 @@ export function CampaignHome({ onNewCampaign, onViewCampaign }: Props) {
         </button>
       </div>
 
-      {/* Recent campaigns */}
       <div className="mb-8">
         <h2 className="text-[11px] font-ui text-muted-foreground uppercase tracking-wider mb-4">
           Recent campaigns
@@ -111,13 +109,10 @@ export function CampaignHome({ onNewCampaign, onViewCampaign }: Props) {
               onClick={() => onViewCampaign(c.id)}
               className="rounded-xl border border-border bg-card p-5 cursor-pointer hover:-translate-y-px hover:border-primary/40 transition-all flex items-center gap-4"
             >
-              {/* Asset thumbnail */}
               <div
                 className="w-14 h-14 rounded-lg flex-shrink-0"
                 style={{ backgroundColor: c.assetColor }}
               />
-
-              {/* Centre info */}
               <div className="flex-1 min-w-0">
                 <p className="font-ui text-[15px] font-medium text-foreground truncate">
                   {c.name}
@@ -138,8 +133,6 @@ export function CampaignHome({ onNewCampaign, onViewCampaign }: Props) {
                   {c.date}
                 </p>
               </div>
-
-              {/* Right status */}
               <div className="flex-shrink-0 text-right w-[120px]">
                 <span
                   className="inline-block rounded-[10px] px-2.5 py-0.5 text-[11px] font-ui font-medium"
@@ -166,7 +159,6 @@ export function CampaignHome({ onNewCampaign, onViewCampaign }: Props) {
             </div>
           ))}
         </div>
-
         <div className="text-center mt-4">
           <button className="text-[12px] font-ui text-primary hover:underline">
             View all campaigns
@@ -174,7 +166,6 @@ export function CampaignHome({ onNewCampaign, onViewCampaign }: Props) {
         </div>
       </div>
 
-      {/* Stats row */}
       <div className="grid grid-cols-3 gap-3">
         {stats.map((s) => (
           <div

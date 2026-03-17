@@ -43,19 +43,16 @@ const Mentor = () => {
   const [rightOpen, setRightOpen] = useState(false);
 
   const [brands, setBrands] = useState<MentorBrand[]>(allBrands);
-  const [activeBrandId, setActiveBrandId] = useState("roast");
+  const [activeBrandId, setActiveBrandId] = useState("nordform");
 
   const [brandDataMap, setBrandDataMap] = useState<Record<string, BrandData>>({
-    roast: roastData,
-    lagos: lagosData,
+    nordform: roastData,
+    sthlm: lagosData,
   });
 
-  // Track which brands are in empty state (no conversation started yet)
   const [emptyBrands, setEmptyBrands] = useState<Record<string, MentorMode>>({});
-  // Track brands showing typing indicator
   const [typingBrands, setTypingBrands] = useState<Set<string>>(new Set());
 
-  // On mount, check for mode param → create a new brand in empty state
   useEffect(() => {
     const mode = searchParams.get("mode") as MentorMode;
     if (mode === "idea" || mode === "brand") {
@@ -79,7 +76,6 @@ const Mentor = () => {
       setBrandDataMap(prev => ({ ...prev, [newId]: newData }));
       setActiveBrandId(newId);
       setEmptyBrands(prev => ({ ...prev, [newId]: mode }));
-      // Clear the param so refresh doesn't re-trigger
       setSearchParams({}, { replace: true });
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -124,24 +120,20 @@ const Mentor = () => {
     const brandId = activeBrandId;
     const mode = emptyBrands[brandId] || "new";
 
-    // Add founder message immediately
     const founderMsg: Message = { id: `${brandId}-f1`, role: "founder", content: text };
     setBrandDataMap(prev => ({
       ...prev,
       [brandId]: { ...prev[brandId], messages: [founderMsg] },
     }));
 
-    // Remove from empty state
     setEmptyBrands(prev => {
       const next = { ...prev };
       delete next[brandId];
       return next;
     });
 
-    // Show typing indicator
     setTypingBrands(prev => new Set(prev).add(brandId));
 
-    // After 1500ms, add AI response
     setTimeout(() => {
       const aiMsg: Message = {
         id: `${brandId}-a1`,
@@ -192,7 +184,6 @@ const Mentor = () => {
 
   return (
     <div className="flex-1 min-h-0 flex flex-row overflow-hidden w-full max-w-full" style={{ minWidth: 0 }}>
-      {/* Left panel */}
       {showLeftInline ? (
         <aside className="w-60 flex-shrink-0 min-w-0 border-r border-border bg-card/50 overflow-hidden">
           <BrandMilestonePanel
@@ -220,9 +211,7 @@ const Mentor = () => {
         </Sheet>
       )}
 
-      {/* Centre panel */}
       <div className="flex-1 min-w-0 max-w-full flex flex-col overflow-hidden relative" style={{ boxSizing: "border-box" }}>
-        {/* Mobile top bar */}
         {isMobile && (
           <div className="h-10 flex items-center px-3 gap-2 border-b border-border flex-shrink-0">
             <button onClick={() => setLeftOpen(true)} className="w-8 h-8 rounded-lg flex items-center justify-center text-muted-foreground hover:text-foreground hover:bg-muted/50 transition-colors">
@@ -235,14 +224,12 @@ const Mentor = () => {
           </div>
         )}
 
-        {/* Tablet right panel toggle */}
         {isTablet && !isMobile && (
           <button onClick={() => setRightOpen(!rightOpen)} className="absolute top-2 right-2 z-10 w-8 h-8 rounded-lg flex items-center justify-center text-muted-foreground hover:text-foreground hover:bg-muted/50 transition-colors">
             {rightOpen ? <PanelRightClose size={18} /> : <PanelRightOpen size={18} />}
           </button>
         )}
 
-        {/* Empty state or chat */}
         {activeEmptyMode ? (
           <MentorEmptyState mode={activeEmptyMode} onSubmit={handleEmptySubmit} />
         ) : activeBrandData ? (
@@ -261,7 +248,6 @@ const Mentor = () => {
         ) : null}
       </div>
 
-      {/* Right panel */}
       {showRightInline ? (
         <aside className="w-[280px] flex-shrink-0 min-w-0 border-l border-border bg-card/50 overflow-hidden">
           <BrandDNAPanel

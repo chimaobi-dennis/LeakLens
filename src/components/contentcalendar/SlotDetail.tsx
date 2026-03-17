@@ -149,7 +149,6 @@ export function SlotDetail({ slot, isNew, newDate, onClose }: SlotDetailProps) {
           </>
         )}
 
-        {/* Asset */}
         <div>
           <label className="text-[10px] uppercase tracking-wider text-muted-foreground font-ui block mb-2">Asset</label>
           {isNew ? (
@@ -157,12 +156,11 @@ export function SlotDetail({ slot, isNew, newDate, onClose }: SlotDetailProps) {
           ) : (
             <div
               className="w-full rounded-lg overflow-hidden"
-              style={{ backgroundColor: asset?.color ?? "#C8951A", height: 160 }}
+              style={{ backgroundColor: asset?.color ?? "#2D4A3E", height: 160 }}
             />
           )}
         </div>
 
-        {/* Copy */}
         <div>
           <div className="flex items-center justify-between mb-2">
             <label className="text-[10px] uppercase tracking-wider text-muted-foreground font-ui">Copy</label>
@@ -181,7 +179,6 @@ export function SlotDetail({ slot, isNew, newDate, onClose }: SlotDetailProps) {
           )}
         </div>
 
-        {/* Reminder */}
         <div>
           <label className="text-[10px] uppercase tracking-wider text-muted-foreground font-ui block mb-3">Reminder</label>
           <div className="flex items-center justify-between">
@@ -195,12 +192,11 @@ export function SlotDetail({ slot, isNew, newDate, onClose }: SlotDetailProps) {
                 <option>1 hour before</option>
                 <option>30 minutes before</option>
               </select>
-              <p className="text-[12px] font-ui text-muted-foreground">chimaobi@roastandco.com</p>
+              <p className="text-[12px] font-ui text-muted-foreground">chimaobi@nordform.se</p>
             </div>
           )}
         </div>
 
-        {/* Info note */}
         <div className="rounded-lg bg-muted/50 p-3 flex gap-2">
           <Info size={14} className="text-muted-foreground flex-shrink-0 mt-0.5" />
           <p className="text-[11px] font-ui text-muted-foreground leading-relaxed">
@@ -209,7 +205,6 @@ export function SlotDetail({ slot, isNew, newDate, onClose }: SlotDetailProps) {
         </div>
       </div>
 
-      {/* Actions */}
       <div className="p-4 border-t border-border space-y-2">
         <button
           onClick={() => {

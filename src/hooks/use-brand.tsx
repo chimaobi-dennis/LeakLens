@@ -14,8 +14,8 @@ interface BrandContextType {
 }
 
 const defaultBrands: Brand[] = [
-  { id: "1", name: "Roast & Co", color: "bg-primary" },
-  { id: "2", name: "Lagos Eats", color: "bg-emerald-500" },
+  { id: "1", name: "Nordform", color: "bg-[#2D4A3E]" },
+  { id: "2", name: "Sthlm Studio", color: "bg-[#1A3A5C]" },
 ];
 
 const BrandContext = createContext<BrandContextType | undefined>(undefined);

@@ -24,12 +24,12 @@ export function DocBrief({ docType, onBack, onGenerate, loading }: Props) {
   const [purpose, setPurpose] = useState("Brand overview");
   const [audience, setAudience] = useState("Potential wholesale partners and investors");
   const [keyMessage, setKeyMessage] = useState(
-    "Roast & Co is Lagos's first serious specialty coffee brand — premium quality, locally rooted, for people who refused to compromise"
+    "Nordform is Stockholm's science-first functional wellness brand — evidence-based supplements for people who are skeptical of wellness culture"
   );
   const [keyPoints, setKeyPoints] = useState(
-    "1. Origin story and Lagos positioning\n2. Product quality and sourcing standards\n3. Target audience and market opportunity"
+    "1. Science-first positioning and honest communication\n2. Product quality and evidence-backed formulas\n3. Target audience and Swedish market opportunity"
   );
-  const [tone, setTone] = useState("Warm and approachable");
+  const [tone, setTone] = useState("Minimal and refined");
   const [includeBrandColors, setIncludeBrandColors] = useState(true);
 
   return (
@@ -41,16 +41,13 @@ export function DocBrief({ docType, onBack, onGenerate, loading }: Props) {
         <ArrowLeft size={14} /> Back to DocStudio
       </button>
 
-      {/* Header */}
       <span className="inline-block text-[10px] font-ui bg-primary/15 text-primary rounded-[10px] px-2.5 py-0.5 mb-2">
         {docType}
       </span>
       <h2 className="font-display text-[22px] text-foreground">{docType}</h2>
       <p className="text-[13px] text-muted-foreground mt-1 mb-6">{descriptions[docType] || ""}</p>
 
-      {/* Form */}
       <div className="rounded-xl border border-border p-7 space-y-5">
-        {/* Purpose */}
         <div>
           <label className="block text-[12px] font-ui font-medium text-foreground mb-1.5">Purpose</label>
           <select
@@ -64,7 +61,6 @@ export function DocBrief({ docType, onBack, onGenerate, loading }: Props) {
           </select>
         </div>
 
-        {/* Audience */}
         <div>
           <label className="block text-[12px] font-ui font-medium text-foreground mb-1.5">Who is this for</label>
           <input
@@ -74,7 +70,6 @@ export function DocBrief({ docType, onBack, onGenerate, loading }: Props) {
           />
         </div>
 
-        {/* Key message */}
         <div>
           <label className="block text-[12px] font-ui font-medium text-foreground mb-1.5">Key message</label>
           <textarea
@@ -85,7 +80,6 @@ export function DocBrief({ docType, onBack, onGenerate, loading }: Props) {
           />
         </div>
 
-        {/* Key points */}
         <div>
           <label className="block text-[12px] font-ui font-medium text-foreground mb-1.5">Three key points to include</label>
           <textarea
@@ -96,7 +90,6 @@ export function DocBrief({ docType, onBack, onGenerate, loading }: Props) {
           />
         </div>
 
-        {/* Tone */}
         <div>
           <label className="block text-[12px] font-ui font-medium text-foreground mb-1.5">Tone</label>
           <select
@@ -110,7 +103,6 @@ export function DocBrief({ docType, onBack, onGenerate, loading }: Props) {
           </select>
         </div>
 
-        {/* Brand colors toggle */}
         <div className="flex items-center justify-between">
           <label className="text-[13px] font-ui text-foreground">Include brand colors</label>
           <button
@@ -124,15 +116,13 @@ export function DocBrief({ docType, onBack, onGenerate, loading }: Props) {
         </div>
       </div>
 
-      {/* Brand DNA notice */}
       <div className="rounded-lg bg-card border border-border p-3 mt-4 flex items-start gap-2.5">
         <Dna size={14} className="text-primary mt-0.5 shrink-0" />
         <p className="text-[12px] text-muted-foreground leading-relaxed">
-          Brand voice, colors and positioning will be pulled automatically from your Roast & Co Brand DNA.
+          Brand voice, colors and positioning will be pulled automatically from your Nordform Brand DNA.
         </p>
       </div>
 
-      {/* Generate */}
       <button
         onClick={onGenerate}
         disabled={loading}
