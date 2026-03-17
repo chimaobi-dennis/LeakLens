@@ -8,9 +8,9 @@ interface Props {
 }
 
 const recentDocs = [
-  { type: "One-Pager" as const, name: "Roast & Co Brand Overview", date: "Created 3 days ago" },
-  { type: "Pitch Deck" as const, name: "Investor Deck — Seed Round", date: "Created 1 week ago" },
-  { type: "Client Proposal" as const, name: "Wholesale Partnership — Nourish Lagos", date: "Created 2 weeks ago" },
+  { type: "One-Pager" as const, name: "Nordform Brand Overview", date: "Created 3 days ago" },
+  { type: "Pitch Deck" as const, name: "Investor Deck — Pre-Seed Round", date: "Created 1 week ago" },
+  { type: "Client Proposal" as const, name: "Wholesale Partnership — Apotek Hjärtat", date: "Created 2 weeks ago" },
 ];
 
 const docTypes: { type: DocType; icon: typeof FileText; desc: string }[] = [
@@ -50,7 +50,6 @@ export function DocHome({ brandName, onSelectType, onOpenRecent }: Props) {
             onClick={onOpenRecent}
             className="group text-left rounded-xl border border-border overflow-hidden cursor-pointer transition-all hover:-translate-y-px hover:border-primary/40"
           >
-            {/* Preview area */}
             <div className="h-[120px] bg-muted/50 relative p-5">
               <div className="absolute left-0 top-0 bottom-0 w-1 bg-primary" />
               <div className="space-y-2.5 pl-3">
@@ -61,7 +60,6 @@ export function DocHome({ brandName, onSelectType, onOpenRecent }: Props) {
                 <div className="h-1.5 w-4/5 rounded bg-muted-foreground/10" />
               </div>
             </div>
-            {/* Info */}
             <div className="p-3.5 px-4">
               <span className="inline-block text-[10px] font-ui bg-primary/15 text-primary rounded-[10px] px-2 py-0.5 mb-1.5">
                 {doc.type}

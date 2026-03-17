@@ -15,7 +15,6 @@ export function PlatformCreative({ tab, content, assetColor, brandName, headline
   if (tab === "WhatsApp") return <WhatsAppCreative content={content} brandName={brandName} />;
   if (tab === "SMS") return <SMSCreative content={content} />;
 
-  // Instagram, Facebook Ad, Twitter/X — visual creative
   const aspect = tab === "Instagram" ? "1/1" : "1.91/1";
   const headlineSize = tab === "Instagram" ? "text-lg" : "text-base";
 
@@ -28,12 +27,12 @@ export function PlatformCreative({ tab, content, assetColor, brandName, headline
         <div className="absolute bottom-0 left-0 right-0 bg-foreground/75 backdrop-blur-sm p-5" style={{ height: "30%" }}>
           <p className={`font-display ${headlineSize} text-background leading-tight`}>
             {tab === "Instagram"
-              ? "The coffee Lagos deserved"
+              ? "The supplement brand for people who hate supplements"
               : tab === "Facebook Ad"
-              ? "Quality meets connection"
-              : "Lagos coffee, elevated"}
+              ? "Science without the noise"
+              : "Clarity from the north"}
           </p>
-          <p className="text-primary text-[13px] font-ui mt-1.5">Order your first bag today →</p>
+          <p className="text-primary text-[13px] font-ui mt-1.5">Start your daily ritual →</p>
         </div>
       </div>
     </div>
@@ -64,7 +63,7 @@ function GoogleAdCreative({ content }: { content: PlatformContent }) {
         <p className="text-lg font-ui font-medium" style={{ color: "hsl(217,89%,61%)" }}>
           {content.headline}
         </p>
-        <p className="text-[12px] text-muted-foreground font-ui mt-1">roastandco.com</p>
+        <p className="text-[12px] text-muted-foreground font-ui mt-1">nordform.se</p>
         <p className="text-sm text-foreground font-ui mt-2 leading-relaxed">{content.copy}</p>
       </div>
     </div>

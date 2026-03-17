@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect } from "react";
+import { useState } from "react";
 import {
   Fingerprint, Megaphone, Users, Palette, Flag, Pencil, Plus,
   MessageCircle, Download, Share2, ChevronRight, Upload,
@@ -6,8 +6,6 @@ import {
 } from "lucide-react";
 import { useBrand } from "@/hooks/use-brand";
 import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip";
-
-/* ── Brand-specific data ── */
 
 interface DNAField {
   key: string;
@@ -41,85 +39,85 @@ interface BrandProfile {
   visual: DNAField[];
 }
 
-const roastProfile: BrandProfile = {
+const nordformProfile: BrandProfile = {
   id: "1",
-  initials: "R&C",
-  name: "Roast & Co",
-  subtitle: "Specialty Coffee · Lagos, Nigeria",
-  circleColor: "hsl(43 78% 46%)",
+  initials: "NF",
+  name: "Nordform",
+  subtitle: "Functional Wellness · Stockholm, Sweden",
+  circleColor: "#2D4A3E",
   completeness: 74,
   lastUpdated: "Last updated from Mentor session · 2 days ago",
   fieldsAdded: "6 fields added this session",
   milestones: [
-    { name: "Identity and voice defined", category: "Brand Discovery", categoryColor: "hsl(43 78% 46%)", timeAgo: "2 days ago" },
-    { name: "Lagos launch campaign", category: "Campaign Strategy", categoryColor: "hsl(217 91% 60%)", timeAgo: "5 days ago" },
+    { name: "Identity and skeptic positioning", category: "Brand Discovery", categoryColor: "hsl(160 25% 30%)", timeAgo: "2 days ago" },
+    { name: "Packaging direction", category: "Brand Discovery", categoryColor: "hsl(160 25% 30%)", timeAgo: "5 days ago" },
     { name: "Target audience profile", category: "Customer Insight", categoryColor: "hsl(174 72% 40%)", timeAgo: "1 week ago" },
-    { name: "Third space positioning", category: "Product Positioning", categoryColor: "hsl(271 60% 55%)", timeAgo: "2 weeks ago" },
-    { name: "Packaging direction", category: "Brand Discovery", categoryColor: "hsl(43 78% 46%)", timeAgo: "3 weeks ago" },
+    { name: "Ritual and consistency positioning", category: "Product Positioning", categoryColor: "hsl(271 60% 55%)", timeAgo: "2 weeks ago" },
+    { name: "Launch strategy", category: "Campaign Strategy", categoryColor: "hsl(217 91% 60%)", timeAgo: "3 weeks ago" },
   ],
   identity: [
-    { key: "Brand name", value: "Roast & Co", flagMilestone: "Brand Discovery", flagDate: "2 days ago" },
-    { key: "Industry", value: "Specialty coffee & lifestyle", flagMilestone: "Brand Discovery", flagDate: "2 days ago" },
-    { key: "Tagline", value: "The coffee Lagos deserved", flagMilestone: "Brand Discovery", flagDate: "2 days ago" },
-    { key: "Location / market", value: "Lagos, Nigeria", flagMilestone: "Brand Discovery", flagDate: "2 days ago" },
+    { key: "Brand name", value: "Nordform", flagMilestone: "Brand Discovery", flagDate: "2 days ago" },
+    { key: "Industry", value: "Functional wellness and adaptogens", flagMilestone: "Brand Discovery", flagDate: "2 days ago" },
+    { key: "Tagline", value: "Clarity from the north", flagMilestone: "Brand Discovery", flagDate: "2 days ago" },
+    { key: "Location / market", value: "Stockholm, Sweden", flagMilestone: "Brand Discovery", flagDate: "2 days ago" },
     { key: "Founded", value: "2024" },
   ],
   voice: [
-    { key: "Brand voice", value: "Serious without being earnest", flagMilestone: "Identity and voice defined", flagDate: "2 days ago" },
-    { key: "Tone descriptors", value: "Warm, considered, restrained, confident", flagMilestone: "Identity and voice defined", flagDate: "2 days ago" },
-    { key: "Brand references", value: "Aesop, Monocle — intelligent restraint", flagMilestone: "Identity and voice defined", flagDate: "2 days ago" },
-    { key: "Positioning statement", value: "The unclaimed third space between international chains and local street coffee", flagMilestone: "Identity and voice defined", flagDate: "2 days ago" },
-    { key: "Core promise", value: "Coffee that respects your intelligence and your city", flagMilestone: "Identity and voice defined", flagDate: "2 days ago" },
+    { key: "Brand voice", value: "Clean, evidence-based, quietly confident — no wellness-industry fluff", flagMilestone: "Identity and skeptic positioning", flagDate: "2 days ago" },
+    { key: "Tone descriptors", value: "Minimal and considered. Speaks to intelligent adults. Never over-claims.", flagMilestone: "Identity and skeptic positioning", flagDate: "2 days ago" },
+    { key: "Brand references", value: "Aesop meets Oatly — design-led but scientifically grounded", flagMilestone: "Identity and skeptic positioning", flagDate: "2 days ago" },
+    { key: "Positioning statement", value: "Premium functional supplements for Stockholm professionals who are skeptical of wellness culture but serious about performance and recovery", flagMilestone: "Identity and skeptic positioning", flagDate: "2 days ago" },
+    { key: "Core promise", value: "Supplements that respect your intelligence", flagMilestone: "Identity and skeptic positioning", flagDate: "2 days ago" },
   ],
   audience: [
-    { key: "Target audience", value: "Young Lagos professionals who moved back and want quality made for them", flagMilestone: "Target audience profile", flagDate: "1 week ago" },
-    { key: "Customer profile", value: "25–38, lived abroad, international standards, Lagos-proud", flagMilestone: "Target audience profile", flagDate: "1 week ago" },
+    { key: "Target audience", value: "Stockholm professionals 28–42, health-conscious, design-aware, internationally oriented, high disposable income", flagMilestone: "Target audience profile", flagDate: "1 week ago" },
+    { key: "Customer profile", value: "28–42, works in tech or design, goes to Lidingöloppet, reads about longevity, slightly embarrassed by wellness industry", flagMilestone: "Target audience profile", flagDate: "1 week ago" },
     { key: "Pain points", value: null },
     { key: "Why they choose us", value: null },
   ],
   visual: [
-    { key: "Primary color", value: "#D4A017", type: "color", colorHex: "#D4A017", flagMilestone: "Brand Discovery", flagDate: "2 days ago" },
-    { key: "Secondary color", value: "#0D1B2A", type: "color", colorHex: "#0D1B2A", flagMilestone: "Brand Discovery", flagDate: "2 days ago" },
-    { key: "Brand feel", value: "Warm, minimal, tactile, considered", flagMilestone: "Brand Discovery", flagDate: "2 days ago" },
+    { key: "Primary color", value: "#2D4A3E", type: "color", colorHex: "#2D4A3E", flagMilestone: "Brand Discovery", flagDate: "2 days ago" },
+    { key: "Secondary color", value: "#F5F0E8", type: "color", colorHex: "#F5F0E8", flagMilestone: "Brand Discovery", flagDate: "2 days ago" },
+    { key: "Brand feel", value: "Nordic minimalism, muted natural tones, clean typography, tactile packaging", flagMilestone: "Brand Discovery", flagDate: "2 days ago" },
     { key: "Logo", value: null, type: "upload" },
   ],
 };
 
-const lagosProfile: BrandProfile = {
+const sthlmProfile: BrandProfile = {
   id: "2",
-  initials: "LE",
-  name: "Lagos Eats",
-  subtitle: "Food Delivery · Lagos, Nigeria",
-  circleColor: "hsl(142 71% 45%)",
+  initials: "SS",
+  name: "Sthlm Studio",
+  subtitle: "SaaS · Stockholm, Sweden",
+  circleColor: "#1A3A5C",
   completeness: 31,
   lastUpdated: "Last updated from Mentor session · 3 days ago",
   fieldsAdded: "2 fields added this session",
   milestones: [
-    { name: "Initial brand exploration", category: "Brand Discovery", categoryColor: "hsl(43 78% 46%)", timeAgo: "3 days ago" },
+    { name: "Initial brand exploration", category: "Brand Discovery", categoryColor: "hsl(160 25% 30%)", timeAgo: "3 days ago" },
   ],
   identity: [
-    { key: "Brand name", value: "Lagos Eats", flagMilestone: "Brand Discovery", flagDate: "3 days ago" },
-    { key: "Industry", value: "Food delivery & culture", flagMilestone: "Brand Discovery", flagDate: "3 days ago" },
-    { key: "Tagline", value: null },
-    { key: "Location / market", value: "Lagos, Nigeria" },
+    { key: "Brand name", value: "Sthlm Studio", flagMilestone: "Brand Discovery", flagDate: "3 days ago" },
+    { key: "Industry", value: "SaaS — freelance and creative studio management", flagMilestone: "Brand Discovery", flagDate: "3 days ago" },
+    { key: "Tagline", value: "Built for how Stockholm works" },
+    { key: "Location / market", value: "Stockholm, Sweden" },
     { key: "Founded", value: null },
   ],
   voice: [
-    { key: "Brand voice", value: null },
+    { key: "Brand voice", value: "Direct, practical, respectful of the user's time" },
     { key: "Tone descriptors", value: null },
     { key: "Brand references", value: null },
     { key: "Positioning statement", value: null },
     { key: "Core promise", value: null },
   ],
   audience: [
-    { key: "Target audience", value: null },
+    { key: "Target audience", value: "Swedish creative freelancers and small studios" },
     { key: "Customer profile", value: null },
     { key: "Pain points", value: null },
     { key: "Why they choose us", value: null },
   ],
   visual: [
-    { key: "Primary color", value: null, type: "color" },
-    { key: "Secondary color", value: null, type: "color" },
+    { key: "Primary color", value: "#1A3A5C", type: "color", colorHex: "#1A3A5C" },
+    { key: "Secondary color", value: "#F0F4F8", type: "color", colorHex: "#F0F4F8" },
     { key: "Brand feel", value: null },
     { key: "Logo", value: null, type: "upload" },
   ],
@@ -133,8 +131,6 @@ const modules = [
   { name: "DocStudio", icon: FileText },
   { name: "ReelBuilder", icon: Film },
 ];
-
-/* ── Inline-editable row ── */
 
 function FieldRow({ field, isLast }: { field: DNAField; isLast: boolean }) {
   const [editing, setEditing] = useState(false);
@@ -186,18 +182,8 @@ function FieldRow({ field, isLast }: { field: DNAField; isLast: boolean }) {
               onChange={(e) => setEditVal(e.target.value)}
               autoFocus
             />
-            <button
-              onClick={() => setEditing(false)}
-              className="text-[12px] text-primary font-medium"
-            >
-              Save
-            </button>
-            <button
-              onClick={() => { setEditing(false); setEditVal(field.value || ""); }}
-              className="text-[12px] text-muted-foreground"
-            >
-              Cancel
-            </button>
+            <button onClick={() => setEditing(false)} className="text-[12px] text-primary font-medium">Save</button>
+            <button onClick={() => { setEditing(false); setEditVal(field.value || ""); }} className="text-[12px] text-muted-foreground">Cancel</button>
           </div>
         ) : (
           <>
@@ -207,10 +193,7 @@ function FieldRow({ field, isLast }: { field: DNAField; isLast: boolean }) {
                 <TooltipTrigger asChild>
                   <Flag size={12} className="text-primary flex-shrink-0 cursor-help" />
                 </TooltipTrigger>
-                <TooltipContent
-                  side="top"
-                  className="bg-[hsl(213_52%_11%)] text-[hsl(36_33%_94%)] text-[11px] px-2.5 py-1 rounded-md border-0"
-                >
+                <TooltipContent side="top" className="bg-[hsl(213_52%_11%)] text-[hsl(36_33%_94%)] text-[11px] px-2.5 py-1 rounded-md border-0">
                   Saved from {field.flagMilestone} · {field.flagDate}
                 </TooltipContent>
               </Tooltip>
@@ -227,17 +210,7 @@ function FieldRow({ field, isLast }: { field: DNAField; isLast: boolean }) {
   );
 }
 
-/* ── Category card ── */
-
-function CategoryCard({
-  icon: Icon,
-  title,
-  fields,
-}: {
-  icon: React.ElementType;
-  title: string;
-  fields: DNAField[];
-}) {
+function CategoryCard({ icon: Icon, title, fields }: { icon: React.ElementType; title: string; fields: DNAField[] }) {
   return (
     <div className="mb-6">
       <div className="flex items-center gap-2 mb-3">
@@ -253,13 +226,11 @@ function CategoryCard({
   );
 }
 
-/* ── Main page ── */
-
 const BrandDNA = () => {
   const { activeBrand, setActiveBrand, brands } = useBrand();
   const [activeProfileId, setActiveProfileId] = useState(activeBrand?.id || "1");
 
-  const profile = activeProfileId === "1" ? roastProfile : lagosProfile;
+  const profile = activeProfileId === "1" ? nordformProfile : sthlmProfile;
 
   const handleSwitchBrand = (id: string) => {
     setActiveProfileId(id);
@@ -271,12 +242,12 @@ const BrandDNA = () => {
     <div className="flex flex-col min-h-0 flex-1">
       <div className="flex-1 overflow-y-auto overflow-x-hidden">
         <div className="max-w-6xl mx-auto px-6 py-8">
-          {/* ── Page header ── */}
+          {/* Page header */}
           <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-6 mb-0">
             <div className="flex items-center gap-4">
               <div
                 className="w-14 h-14 rounded-full flex items-center justify-center flex-shrink-0 font-ui text-base font-medium"
-                style={{ backgroundColor: profile.circleColor, color: "hsl(213 52% 11%)" }}
+                style={{ backgroundColor: profile.circleColor, color: "#F5F0E8" }}
               >
                 {profile.initials}
               </div>
@@ -290,7 +261,6 @@ const BrandDNA = () => {
               </div>
             </div>
 
-            {/* Completeness card */}
             <div className="rounded-xl border border-border p-4 px-5 min-w-[220px] bg-card">
               <p className="text-[11px] uppercase tracking-wider text-muted-foreground">Profile completeness</p>
               <p className="font-display text-[32px] text-primary leading-tight mt-0.5">{profile.completeness}%</p>
@@ -304,7 +274,6 @@ const BrandDNA = () => {
 
           <div className="border-t border-border my-6" />
 
-          {/* ── Two-column layout ── */}
           <div className="flex flex-col lg:flex-row gap-8">
             {/* Left column */}
             <div className="flex-1 min-w-0">
@@ -313,7 +282,6 @@ const BrandDNA = () => {
               <CategoryCard icon={Users} title="Audience" fields={profile.audience} />
               <CategoryCard icon={Palette} title="Visual" fields={profile.visual} />
 
-              {/* Info card */}
               <div className="rounded-lg bg-muted/50 p-3 px-4 mt-4 flex items-start gap-2.5">
                 <MessageCircle size={14} className="text-primary flex-shrink-0 mt-0.5" />
                 <p className="text-[12px] text-muted-foreground leading-relaxed">
@@ -324,10 +292,9 @@ const BrandDNA = () => {
 
             {/* Right sidebar */}
             <div className="w-full lg:w-[300px] flex-shrink-0">
-              {/* Brand switcher */}
               <p className="text-[11px] uppercase tracking-wider text-muted-foreground mb-3">Your brands</p>
 
-              {[roastProfile, lagosProfile].map((bp) => {
+              {[nordformProfile, sthlmProfile].map((bp) => {
                 const isActive = bp.id === activeProfileId;
                 return (
                   <div
@@ -341,7 +308,7 @@ const BrandDNA = () => {
                   >
                     <div
                       className="w-8 h-8 rounded-full flex items-center justify-center text-[11px] font-medium flex-shrink-0"
-                      style={{ backgroundColor: bp.circleColor, color: "hsl(213 52% 11%)" }}
+                      style={{ backgroundColor: bp.circleColor, color: "#F5F0E8" }}
                     >
                       {bp.initials}
                     </div>
@@ -365,7 +332,6 @@ const BrandDNA = () => {
 
               <div className="border-t border-border my-4" />
 
-              {/* Milestones */}
               <p className="text-[11px] uppercase tracking-wider text-muted-foreground mb-3">Milestones</p>
               <div className="flex flex-col gap-2.5 mb-1">
                 {profile.milestones.map((m, i) => (
@@ -382,7 +348,6 @@ const BrandDNA = () => {
 
               <div className="border-t border-border my-4" />
 
-              {/* Connected modules */}
               <p className="text-[11px] uppercase tracking-wider text-muted-foreground mb-3">Active in modules</p>
               <div className="grid grid-cols-2 gap-2">
                 {modules.map((m) => (
@@ -397,7 +362,6 @@ const BrandDNA = () => {
 
               <div className="border-t border-border my-4" />
 
-              {/* Quick actions */}
               <p className="text-[11px] uppercase tracking-wider text-muted-foreground mb-3">Quick actions</p>
               {[
                 { label: "Continue Brand Discovery", icon: MessageCircle },

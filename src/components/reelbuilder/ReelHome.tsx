@@ -12,25 +12,25 @@ interface Props {
 
 const recentReels = [
   {
-    name: "Roast & Co Origin Story",
+    name: "Nordform Origin Story",
     platform: "Instagram Reels",
     duration: "60s · 5 scenes",
     date: "Created 4 days ago",
-    colors: ["hsl(213 52% 14%)", "hsl(213 52% 17%)", "hsl(213 52% 12%)"],
+    colors: ["hsl(160 25% 14%)", "hsl(160 25% 17%)", "hsl(160 25% 12%)"],
   },
   {
-    name: "Meet Your Morning Series — Ep.1",
+    name: "Meet Your Morning — Ep.1",
     platform: "TikTok",
     duration: "45s · 4 scenes",
     date: "Created 1 week ago",
-    colors: ["hsl(220 20% 13%)", "hsl(220 20% 16%)", "hsl(220 20% 11%)"],
+    colors: ["hsl(160 20% 13%)", "hsl(160 20% 16%)", "hsl(160 20% 11%)"],
   },
   {
-    name: "Lagos Coffee Culture",
+    name: "The Science Behind Daily Stack",
     platform: "YouTube Shorts",
     duration: "90s · 7 scenes",
     date: "Created 2 weeks ago",
-    colors: ["hsl(30 20% 12%)", "hsl(30 20% 15%)", "hsl(30 20% 10%)"],
+    colors: ["hsl(160 15% 12%)", "hsl(160 15% 15%)", "hsl(160 15% 10%)"],
   },
 ];
 
@@ -49,11 +49,11 @@ const templates = [
     uses: "3.2k uses",
     tone: "Warm and personal",
     sceneList: [
-      { num: "01", title: "Establishing shot", time: "0:00–0:12", visual: "Aerial shot of Lagos skyline at golden hour. Camera slowly descends toward a rooftop with a coffee cup in foreground." },
-      { num: "02", title: "The problem", time: "0:12–0:24", visual: "Close-up hands sorting through coffee beans. Warm amber light. Slow deliberate motion." },
-      { num: "03", title: "The build", time: "0:24–0:36", visual: "The roasting process. Coffee beans tumbling in a roaster drum. Steam rising." },
-      { num: "04", title: "The product", time: "0:36–0:48", visual: "A finished cup of coffee placed on a marble surface. Lagos street visible through a window." },
-      { num: "05", title: "The CTA", time: "0:48–1:00", visual: "The Roast & Co bag centred on a clean surface. Logo reveal. Amber color fills the frame edge." },
+      { num: "01", title: "Establishing shot", time: "0:00–0:12", visual: "Aerial shot of Stockholm at golden hour. Camera descends toward a kitchen counter with the Nordform Daily Stack." },
+      { num: "02", title: "The problem", time: "0:12–0:24", visual: "Close-up hands sorting through supplement bottles. Clean Nordic light. Deliberate motion." },
+      { num: "03", title: "The build", time: "0:24–0:36", visual: "The formulation process. Lab setting. Clean, minimal, evidence-based." },
+      { num: "04", title: "The product", time: "0:36–0:48", visual: "The Daily Stack on a marble kitchen counter. Stockholm apartment visible through window." },
+      { num: "05", title: "The CTA", time: "0:48–1:00", visual: "The Nordform packaging centred on a clean surface. Logo reveal. Forest green fills the frame edge." },
     ],
     bestFor: "Instagram Reels, TikTok",
   },
@@ -200,8 +200,8 @@ export function ReelHome({ brandName, onNewReel, onOpenRecent, onUseTemplate }: 
                 <div key={ci} className="flex-1" style={{ backgroundColor: c }} />
               ))}
               <div className="absolute inset-0 flex items-center justify-center">
-                <div className="w-10 h-10 rounded-full flex items-center justify-center" style={{ background: "rgba(212,160,23,0.9)" }}>
-                  <Play size={18} className="text-primary-foreground ml-0.5" fill="currentColor" />
+                <div className="w-10 h-10 rounded-full flex items-center justify-center" style={{ background: "rgba(45,74,62,0.9)" }}>
+                  <Play size={18} className="text-[#F5F0E8] ml-0.5" fill="currentColor" />
                 </div>
               </div>
             </div>
@@ -241,15 +241,12 @@ export function ReelHome({ brandName, onNewReel, onOpenRecent, onUseTemplate }: 
             onClick={() => setSelectedTemplate(t)}
             className="w-[220px] flex-shrink-0 rounded-xl border border-border overflow-hidden cursor-pointer hover:-translate-y-0.5 hover:border-primary/40 transition-all bg-card"
           >
-            {/* Amber top border */}
             <div className="h-0.5 bg-primary" />
-            {/* Scene strip */}
             <div className="h-[120px] flex">
               {t.sceneColors.map((c, ci) => (
                 <div key={ci} className="flex-1" style={{ backgroundColor: c }} />
               ))}
             </div>
-            {/* Info */}
             <div className="p-3.5 px-4">
               <p className="text-[13px] font-medium text-foreground">{t.name}</p>
               <p className="text-[11px] text-muted-foreground mt-0.5">{t.scenes}</p>
@@ -270,7 +267,6 @@ export function ReelHome({ brandName, onNewReel, onOpenRecent, onUseTemplate }: 
           <DialogTitle className="sr-only">{selectedTemplate?.name} template</DialogTitle>
           {selectedTemplate && (
             <div className="flex flex-col md:flex-row max-h-[85vh]">
-              {/* Left panel */}
               <div className="md:w-[45%] p-7 bg-muted/30 overflow-y-auto">
                 <h2 className="font-display text-xl text-foreground">{selectedTemplate.name}</h2>
                 <div className="flex items-center gap-2 mt-2">
@@ -314,13 +310,12 @@ export function ReelHome({ brandName, onNewReel, onOpenRecent, onUseTemplate }: 
                 <p className="text-[12px] text-primary text-center mt-2.5 cursor-pointer">Preview example</p>
               </div>
 
-              {/* Right panel */}
-              <div className="md:w-[55%] bg-[hsl(213_52%_5%)] p-6 flex flex-col gap-3 overflow-y-auto">
+              <div className="md:w-[55%] bg-[hsl(160_25%_5%)] p-6 flex flex-col gap-3 overflow-y-auto">
                 {selectedTemplate.sceneList.map((s) => (
                   <div key={s.num} className="rounded-lg p-3 border" style={{ background: "rgba(255,255,255,0.04)", borderColor: "rgba(255,255,255,0.08)" }}>
                     <p className="text-[10px] text-primary font-medium">Scene {s.num}</p>
                     <p className="text-[12px] font-medium mt-0.5" style={{ color: "hsl(38 30% 90%)" }}>{s.title}</p>
-                    <p className="text-[11px] leading-relaxed mt-1" style={{ color: "hsl(213 20% 55%)" }}>{s.visual}</p>
+                    <p className="text-[11px] leading-relaxed mt-1" style={{ color: "hsl(160 15% 55%)" }}>{s.visual}</p>
                   </div>
                 ))}
               </div>

@@ -21,7 +21,7 @@ export function DocPreview({ docType, onBackToHome, onEditBrief }: Props) {
       {/* Action bar */}
       <div className="flex items-center justify-between mb-5">
         <div className="flex items-center gap-2">
-          <span className="text-[16px] font-medium font-ui text-foreground">Roast & Co Brand Overview</span>
+          <span className="text-[16px] font-medium font-ui text-foreground">Nordform Brand Overview</span>
           <Pencil size={14} className="text-muted-foreground cursor-pointer hover:text-foreground" />
         </div>
         <div className="flex items-center gap-2">
@@ -40,38 +40,38 @@ export function DocPreview({ docType, onBackToHome, onEditBrief }: Props) {
       {/* Document card */}
       <div className="rounded-xl border border-border overflow-hidden max-w-[720px] mx-auto">
         {/* Document header */}
-        <div className="bg-[hsl(213,52%,11%)] dark:bg-[hsl(213,52%,11%)] px-12 py-10 border-l-4 border-l-primary">
-          <p className="text-[11px] uppercase tracking-[0.15em] text-primary font-ui">ROAST & CO</p>
-          <h2 className="font-display text-[28px] text-[hsl(36,33%,94%)] mt-2">Brand Overview</h2>
-          <div className="w-10 h-0.5 bg-primary mt-3 mb-3" />
-          <p className="text-[13px] text-[hsl(220,9%,60%)]">Specialty Coffee · Lagos, Nigeria · 2026</p>
+        <div className="bg-[#2D4A3E] px-12 py-10 border-l-4 border-l-primary">
+          <p className="text-[11px] uppercase tracking-[0.15em] text-[#F5F0E8] font-ui">NORDFORM</p>
+          <h2 className="font-display text-[28px] text-[#F5F0E8] mt-2">Brand Overview</h2>
+          <div className="w-10 h-0.5 bg-[#F5F0E8] mt-3 mb-3" />
+          <p className="text-[13px] text-[#F5F0E8]/60">Functional Wellness · Stockholm, Sweden · 2026</p>
         </div>
 
         {/* Document body */}
         <div className="bg-card px-12 py-10 space-y-8">
           <Section
             title="Who We Are"
-            body="Roast & Co is Lagos's first serious specialty coffee brand. Built for people who lived elsewhere, experienced great coffee, moved back, and refused to compromise. We are serious about sourcing. Serious about quality. And unmistakably Lagos."
+            body="Nordform is Stockholm's first science-first functional wellness brand. Built for professionals who are skeptical of wellness culture but serious about performance and recovery. We are evidence-based, honestly communicated, and designed for people who would normally roll their eyes at this category."
           />
           <Section
             title="Our Product"
-            body="Single-origin beans sourced from across Africa and beyond. Roasted to highlight character not to mask it. Every bag traceable to its farm, its farmer, its story. Available direct-to-consumer and through select wholesale partners."
+            body="The Nordform Daily Stack is a three-product morning ritual kit: Lion's Mane focus capsules, Ashwagandha stress capsules, and Reishi sleep capsules. Minimal white packaging with forest green typography. Every ingredient traceable, every claim evidence-backed."
           />
           <Section
             title="Our Audience"
-            body="Young Lagos professionals — 25 to 38 — who have lived elsewhere, hold international standards, and want a brand that respects their intelligence and their city. They are not buying coffee. They are buying the feeling that Lagos finally has something made for them."
+            body="Stockholm professionals 28–42 who are health-conscious, design-aware, and internationally oriented. They read about longevity, are slightly embarrassed by the wellness industry, but genuinely interested in optimising how they feel. They want the science without the noise."
           />
           <Section
             title="The Opportunity"
-            body="The Lagos specialty coffee market is nascent and underclaimed. International chains feel imported. Street coffee lacks premium positioning. Roast & Co owns the third space — unmistakably local, internationally credible."
+            body="The Swedish functional wellness market is growing but trust-deficient. Most brands overclaim. Nordform owns the position of honest communication — the supplement brand for people who hate supplement brands. Ritual and consistency over miracle results."
           />
         </div>
 
         {/* Footer */}
         <div className="border-t border-border px-12 py-5 flex items-center justify-between">
-          <span className="text-[12px] text-muted-foreground">roastandco.com</span>
-          <span className="w-1.5 h-1.5 rounded-full bg-primary" />
-          <span className="text-[12px] text-muted-foreground">hello@roastandco.com</span>
+          <span className="text-[12px] text-muted-foreground">nordform.se</span>
+          <span className="w-1.5 h-1.5 rounded-full bg-[#2D4A3E]" />
+          <span className="text-[12px] text-muted-foreground">hello@nordform.se</span>
         </div>
       </div>
 

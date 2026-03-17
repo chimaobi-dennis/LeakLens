@@ -17,9 +17,9 @@ export function TemplateModal({ template, open, onClose, type, brandName, brandI
   const [activeVariation, setActiveVariation] = useState(0);
 
   // Digital inputs
-  const [customerName, setCustomerName] = useState("Adaeze K.");
-  const [customerQuote, setCustomerQuote] = useState("I built my entire launch campaign in one session.");
-  const [customerRole, setCustomerRole] = useState("Founder, StyleHaus Lagos");
+  const [customerName, setCustomerName] = useState("Erik L.");
+  const [customerQuote, setCustomerQuote] = useState("I have tried every supplement brand. Nordform is the first one I actually trust.");
+  const [customerRole, setCustomerRole] = useState("Product designer, Stockholm");
   const [rating, setRating] = useState(4);
   const [planName, setPlanName] = useState("Pro Plan");
   const [price, setPrice] = useState("$29/mo");
@@ -60,7 +60,7 @@ export function TemplateModal({ template, open, onClose, type, brandName, brandI
         </button>
 
         <div className="flex flex-col md:flex-row max-h-[85vh]">
-          {/* Left panel — inputs */}
+          {/* Left panel */}
           <div className="w-full md:w-[45%] p-7 overflow-y-auto bg-card border-r border-border">
             <h2 className="font-display text-[20px] text-foreground">{template.name}</h2>
             <div className="flex items-center gap-2 mt-2">
@@ -77,11 +77,10 @@ export function TemplateModal({ template, open, onClose, type, brandName, brandI
 
             {type === "physical" ? (
               <>
-                {/* Upload zone */}
                 {hasUploaded ? (
                   <div className="relative rounded-lg border border-border p-4 flex flex-col items-center gap-2">
-                    <div className="w-[120px] h-[80px] rounded-md bg-primary flex items-center justify-center">
-                      <span className="text-[11px] font-ui text-primary-foreground font-medium">{brandName}</span>
+                    <div className="w-[120px] h-[80px] rounded-md flex items-center justify-center" style={{ backgroundColor: "#2D4A3E" }}>
+                      <span className="text-[11px] font-ui text-[#F5F0E8] font-medium">{brandName}</span>
                     </div>
                     <span className="text-[11px] font-ui text-muted-foreground">product-photo.png</span>
                     <button
@@ -102,7 +101,6 @@ export function TemplateModal({ template, open, onClose, type, brandName, brandI
                   </div>
                 )}
 
-                {/* Aspect ratio */}
                 <div className="mt-4">
                   <label className="text-[11px] font-ui text-muted-foreground uppercase tracking-wider mb-2 block">
                     Aspect ratio
@@ -126,7 +124,6 @@ export function TemplateModal({ template, open, onClose, type, brandName, brandI
                 </div>
               </>
             ) : (
-              /* Digital inputs */
               <div className="space-y-3">
                 {isTestimonial ? (
                   <>
@@ -197,7 +194,7 @@ export function TemplateModal({ template, open, onClose, type, brandName, brandI
             <p className="text-[11px] font-ui text-muted-foreground text-center mt-2">Uses 1 credit</p>
           </div>
 
-          {/* Right panel — preview */}
+          {/* Right panel */}
           <div className="w-full md:w-[55%] bg-background flex flex-col items-center justify-center p-6 min-h-[400px]">
             {isGenerating ? (
               <div className="flex flex-col items-center gap-3">
@@ -206,7 +203,6 @@ export function TemplateModal({ template, open, onClose, type, brandName, brandI
               </div>
             ) : generated ? (
               <div className="flex flex-col items-center gap-4 w-full max-w-[380px]">
-                {/* Main preview */}
                 <div
                   className="w-full aspect-square rounded-lg flex items-center justify-center relative"
                   style={{ backgroundColor: variationTints[activeVariation] }}
@@ -245,7 +241,6 @@ export function TemplateModal({ template, open, onClose, type, brandName, brandI
                   )}
                 </div>
 
-                {/* Variation counter */}
                 <div className="flex items-center gap-3">
                   <button
                     onClick={() => setActiveVariation((p) => Math.max(0, p - 1))}
@@ -264,7 +259,6 @@ export function TemplateModal({ template, open, onClose, type, brandName, brandI
                   </button>
                 </div>
 
-                {/* Thumbnails */}
                 <div className="flex gap-2">
                   {[0, 1, 2, 3].map((i) => (
                     <button
@@ -279,7 +273,6 @@ export function TemplateModal({ template, open, onClose, type, brandName, brandI
                   ))}
                 </div>
 
-                {/* Actions */}
                 <div className="flex gap-3 w-full">
                   <Button variant="outline" className="flex-1 h-10 text-[13px] gap-1.5">
                     <Download size={14} /> Download

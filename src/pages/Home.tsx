@@ -8,16 +8,16 @@ import { Link, useNavigate } from "react-router-dom";
 import { useEffect, useRef } from "react";
 
 const mockChat = [
-  { role: "user" as const, text: "I want to launch a specialty coffee brand called Roast & Co. Premium single-origin, targeting millennials who care about sourcing." },
-  { role: "ai" as const, text: "Great foundation. Let's start with positioning — are you competing on taste experience, ethical sourcing, or lifestyle identity? This shapes everything from your visual language to your pricing." },
-  { role: "user" as const, text: "Lifestyle identity first, but ethical sourcing is a close second." },
-  { role: "ai" as const, text: "Perfect. That gives us a warm, editorial brand direction. Think Aesop meets Blue Bottle. Let me sketch out your brand DNA..." },
-  { role: "user" as const, text: "Love that direction. What about packaging — should we go minimal or maximalist?" },
-  { role: "ai" as const, text: "Given the lifestyle-first positioning, I'd lean toward refined minimalism with tactile details. Think matte kraft paper, debossed logo, one accent color. The packaging should feel like something you'd keep on your kitchen counter as decor." },
-  { role: "user" as const, text: "That's exactly right. Can you mock up a label concept?" },
-  { role: "ai" as const, text: "Absolutely. I'll create three label directions in ProStudio — one typographic, one illustrative, and one photographic. Each will use your warm amber palette with navy accents. Give me a moment..." },
-  { role: "user" as const, text: "Also thinking about our first Instagram campaign. Any ideas?" },
-  { role: "ai" as const, text: "For launch, I'd suggest a 'Meet Your Morning' series — lifestyle shots of the coffee in real morning routines. We can build this in CampaignKit with platform-specific crops and copy variations. Want me to draft the brief?" },
+  { role: "user" as const, text: "I want to build a functional wellness brand called Nordform. Science-based adaptogens, targeting Stockholm professionals who are skeptical of wellness culture." },
+  { role: "ai" as const, text: "Interesting tension. Swedish consumers are very open to health products but deeply skeptical of wellness marketing. How honest are you willing to be about what the research actually shows?" },
+  { role: "user" as const, text: "Completely honest. I think that is actually the differentiator." },
+  { role: "ai" as const, text: "That is a strong instinct. If Nordform says 'the research is promising but not conclusive — here is what we know' that builds more trust than overclaiming. How do you communicate uncertainty without undermining purchase confidence?" },
+  { role: "user" as const, text: "We frame it around ritual and consistency rather than miracle results." },
+  { role: "ai" as const, text: "Smart. That shifts the success metric from the product to the behavior. What does the physical product look like? In Sweden the packaging carries a lot of brand weight." },
+  { role: "user" as const, text: "Minimal white packaging. Forest green typography. Very clean. More design object than supplement bottle." },
+  { role: "ai" as const, text: "Perfect for Stockholm. Supplements that look good on a kitchen counter rather than hidden in a cabinet. The packaging signals intelligence before the customer reads a word. Who is your specific customer?" },
+  { role: "user" as const, text: "Mid-thirties, works in tech or design, slightly embarrassed by the wellness industry but genuinely interested in optimising how they feel." },
+  { role: "ai" as const, text: "That self-awareness is gold. Nordform is the supplement brand for people who hate supplement brands. That is a real positioning. Write that down — it is your brief for everything." },
 ];
 
 const modules = [
@@ -30,12 +30,12 @@ const modules = [
 ];
 
 const recentAssets = [
-  { name: "Coffee bag on marble", platform: "Instagram" },
+  { name: "Daily Stack on counter", platform: "Instagram" },
   { name: "Testimonial card", platform: "Facebook" },
   { name: "Feature card", platform: "General" },
   { name: "Announcement visual", platform: "Instagram" },
-  { name: "Facebook ad creative", platform: "Facebook" },
-  { name: "Instagram lifestyle shot", platform: "Instagram" },
+  { name: "Ashwagandha close-up", platform: "Facebook" },
+  { name: "Lifestyle morning shot", platform: "Instagram" },
 ];
 
 const today = new Date();
@@ -46,16 +46,16 @@ const upcomingDays = Array.from({ length: 7 }, (_, i) => {
 });
 
 const scheduledPosts: Record<number, { platform: string; copy: string; time: string }> = {
-  0: { platform: "Instagram", copy: "Start your morning ritual with single-origin perfection.", time: "09:00" },
-  2: { platform: "Facebook", copy: "New blend drop — Ethiopian Yirgacheffe is back in stock.", time: "12:30" },
-  4: { platform: "Instagram", copy: "Behind the roast: our sourcing journey to Colombia.", time: "10:00" },
-  5: { platform: "Twitter", copy: "What's your brewing method? We're pour-over purists ☕", time: "14:00" },
+  0: { platform: "Instagram", copy: "Morning ritual with Nordform Daily Stack ✦", time: "09:00" },
+  2: { platform: "Facebook", copy: "What our customers actually say about Lion's Mane", time: "12:30" },
+  4: { platform: "Instagram", copy: "The science behind Ashwagandha — honestly explained", time: "10:00" },
+  5: { platform: "Twitter", copy: "Three supplements. One daily ritual. No overclaiming. ✦", time: "14:00" },
 };
 
 const dayName = (d: Date) => d.toLocaleDateString("en-GB", { weekday: "short" });
 const dayDate = (d: Date) => `${d.getDate()} ${d.toLocaleDateString("en-GB", { month: "short" })}`;
 
-const platformColor: Record<string, string> = { Instagram: "text-primary", Facebook: "text-blue-400", Twitter: "text-sky-400", General: "text-muted-foreground" };
+const platformColor: Record<string, string> = { Instagram: "text-[#2D4A3E]", Facebook: "text-blue-400", Twitter: "text-sky-400", General: "text-muted-foreground" };
 const platformIcon: Record<string, typeof Instagram> = { Instagram, Facebook, Twitter };
 
 function ModuleVisual({ type }: { type: string }) {
@@ -168,12 +168,12 @@ const Home = () => {
           </div>
         </div>
 
-        {/* Chat preview — stacks below on mobile/tablet, side-by-side on desktop */}
+        {/* Chat preview */}
         <div className="col-span-1 lg:col-span-2 flex flex-col">
           <div className="rounded-xl border-[0.5px] border-card-border bg-card overflow-hidden shadow-lg dark:shadow-primary/5 shadow-black/5">
             <div className="px-5 py-3 border-b border-border flex items-center gap-2">
               <div className="w-2 h-2 rounded-full bg-primary animate-amber-pulse" />
-              <span className="font-ui text-xs text-muted-foreground">Mentor · Roast & Co session</span>
+              <span className="font-ui text-xs text-muted-foreground">Mentor · Nordform session</span>
             </div>
             <div ref={chatRef} className="px-5 py-4 space-y-3 h-[320px] overflow-y-auto scrollbar-chat">
               {mockChat.map((msg, i) => (
@@ -292,7 +292,6 @@ function AssetCard({ asset, mobile, tablet }: { asset: { name: string; platform:
         <div className="w-full h-full bg-gradient-to-br from-muted/40 to-muted/20 flex items-center justify-center">
           <Camera size={20} className="text-muted-foreground/40" />
         </div>
-        {/* Hover overlay on desktop/tablet, always visible on mobile */}
         <div className={`absolute bottom-1.5 right-1.5 flex gap-1.5 ${mobile ? "opacity-100" : "opacity-0 group-hover:opacity-100"} transition-opacity duration-200`}>
           <button className="w-7 h-7 rounded-full bg-card/90 border border-border flex items-center justify-center hover:border-primary transition-colors duration-200">
             <Download size={12} className="text-foreground" />

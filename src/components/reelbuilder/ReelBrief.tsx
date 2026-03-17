@@ -14,12 +14,12 @@ interface Props {
 }
 
 export function ReelBrief({ onBack, onBuild, loading, initialTopic, initialTone }: Props) {
-  const [topic, setTopic] = useState(initialTopic || "Roast & Co origin story — why we built this");
+  const [topic, setTopic] = useState(initialTopic || "Nordform origin story — why we built this");
   const [platform, setPlatform] = useState("Instagram Reels");
   const [length, setLength] = useState("60 seconds");
   const [goal, setGoal] = useState("Tell origin story");
   const [tone, setTone] = useState(initialTone || "Warm and personal");
-  const [keyMessage, setKeyMessage] = useState("We built the coffee Lagos deserved — for people who moved back and refused to compromise");
+  const [keyMessage, setKeyMessage] = useState("We built the supplement brand for people who hate supplement brands — science-based, honestly communicated, no fluff");
 
   return (
     <div className="max-w-2xl mx-auto px-6 py-8">
@@ -31,13 +31,11 @@ export function ReelBrief({ onBack, onBuild, loading, initialTopic, initialTone 
       <p className="text-[13px] text-muted-foreground mt-1 mb-6">Brief your reel and we will build the full scene-by-scene script.</p>
 
       <div className="rounded-xl border border-border bg-card p-7 space-y-5">
-        {/* Topic */}
         <div>
           <label className="text-[11px] uppercase tracking-wider text-muted-foreground mb-1.5 block">Topic</label>
           <Input value={topic} onChange={(e) => setTopic(e.target.value)} />
         </div>
 
-        {/* Platform */}
         <div>
           <label className="text-[11px] uppercase tracking-wider text-muted-foreground mb-1.5 block">Platform</label>
           <Select value={platform} onValueChange={setPlatform}>
@@ -50,7 +48,6 @@ export function ReelBrief({ onBack, onBuild, loading, initialTopic, initialTone 
           </Select>
         </div>
 
-        {/* Length */}
         <div>
           <label className="text-[11px] uppercase tracking-wider text-muted-foreground mb-1.5 block">Length</label>
           <Select value={length} onValueChange={setLength}>
@@ -63,7 +60,6 @@ export function ReelBrief({ onBack, onBuild, loading, initialTopic, initialTone 
           </Select>
         </div>
 
-        {/* Goal */}
         <div>
           <label className="text-[11px] uppercase tracking-wider text-muted-foreground mb-1.5 block">Goal</label>
           <Select value={goal} onValueChange={setGoal}>
@@ -76,7 +72,6 @@ export function ReelBrief({ onBack, onBuild, loading, initialTopic, initialTone 
           </Select>
         </div>
 
-        {/* Tone */}
         <div>
           <label className="text-[11px] uppercase tracking-wider text-muted-foreground mb-1.5 block">Tone</label>
           <Select value={tone} onValueChange={setTone}>
@@ -89,18 +84,16 @@ export function ReelBrief({ onBack, onBuild, loading, initialTopic, initialTone 
           </Select>
         </div>
 
-        {/* Key message */}
         <div>
           <label className="text-[11px] uppercase tracking-wider text-muted-foreground mb-1.5 block">Key message</label>
           <Textarea rows={2} value={keyMessage} onChange={(e) => setKeyMessage(e.target.value)} />
         </div>
       </div>
 
-      {/* Brand DNA notice */}
       <div className="rounded-lg bg-secondary p-3 mt-4 flex items-start gap-2">
         <Dna size={14} className="text-primary mt-0.5 shrink-0" />
         <p className="text-[12px] text-muted-foreground leading-relaxed">
-          Brand voice and positioning will be pulled automatically from your Roast & Co Brand DNA.
+          Brand voice and positioning will be pulled automatically from your Nordform Brand DNA.
         </p>
       </div>
 

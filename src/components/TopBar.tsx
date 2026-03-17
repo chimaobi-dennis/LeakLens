@@ -99,7 +99,7 @@ export function TopBar() {
                     <span className="text-[13px] font-ui text-muted-foreground">Founder</span>
                     <span className="text-[10px] font-ui font-semibold px-1.5 py-0.5 rounded-full bg-primary/15 text-primary">Pro Plan</span>
                   </div>
-                  <p className="text-[12px] font-ui text-muted-foreground mt-0.5 truncate">chimaobi@roastandco.com</p>
+                  <p className="text-[12px] font-ui text-muted-foreground mt-0.5 truncate">chimaobi@nordform.se</p>
                 </div>
               </div>
 
