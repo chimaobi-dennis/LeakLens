@@ -26,12 +26,12 @@ export const callAI = async (
       return msg;
     });
 
-    const response = await fetch("https://mujfx.jojapi.net/chat/completions", {
+    const response = await fetch("https://swift-ai.p.rapidapi.com/chat/completions", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        "X-JoJAPI-Key":
-          "***REMOVED***",
+        "X-RapidAPI-Key": "***REMOVED***",
+        "X-RapidAPI-Host": "swift-ai.p.rapidapi.com",
       },
       body: JSON.stringify({
         model: "claude-sonnet-4",
