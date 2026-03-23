@@ -26,12 +26,12 @@ export const callAI = async (
       return msg;
     });
 
-    const response = await fetch("https://swift-ai.p.rapidapi.com/chat/completions", {
+    const response = await fetch("https://double-gpt.p.rapidapi.com/chat/completions", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
         "X-RapidAPI-Key": "***REMOVED***",
-        "X-RapidAPI-Host": "swift-ai.p.rapidapi.com",
+        "X-RapidAPI-Host": "double-gpt.p.rapidapi.com",
       },
       body: JSON.stringify({
         model: "gpt-5",
