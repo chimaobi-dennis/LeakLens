@@ -11,6 +11,5 @@ Secret scanner CLI + library in TypeScript (Node 20+, ESM, no framework).
 
 Rules of the repo:
 - Never commit real secrets, not even revoked ones. Fixtures are synthetic.
-- Never rewrite history. Commits before tag `kinika-archive` are the previous project and are kept on purpose.
 - `npm run scan:self` must stay clean (baseline in `.leaklens.yml` covers the known historic leaks).
 - Tests: `npm test`. Typecheck: `npm run typecheck`.

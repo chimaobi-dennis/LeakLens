@@ -17,11 +17,9 @@ Scanned 24 files and 1216 commits in 282 ms.
 ✖ 2 finding(s): 1 critical, 1 medium
 ```
 
-That output is real. This repository spent its first 1,216 commits as a
-Lovable-generated AI brand platform, and along the way a Supabase
-service-role key and two third-party API keys were committed. LeakLens found
-all of them on its first run over its own history, which is why the project
-exists.
+That output comes from running LeakLens over its own repository history:
+early commits had a Supabase service-role key and two third-party API keys
+checked in, and the history scan caught all of them.
 
 ## Why another secret scanner?
 
@@ -159,12 +157,6 @@ npm run scan:self   # scan this repository's full history
 ## Roadmap
 
 See [ROADMAP.md](ROADMAP.md).
-
-## Project history
-
-Commits before the `kinika-archive` tag belong to the previous project that
-lived in this repository (an AI brand platform generated with Lovable). They
-are kept deliberately: they are the test corpus that proves LeakLens works.
 
 ## License
 

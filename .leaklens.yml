@@ -1,9 +1,8 @@
 # LeakLens configuration for this repository.
 #
-# This repo scans its own full git history in CI. The history contains real
-# leaks from the project's previous life as a Lovable-generated brand platform
-# (see `git tag kinika-archive`). Those credentials have been rotated and the
-# fingerprints below mark them as reviewed so CI only fails on NEW secrets.
+# This repo scans its own full git history in CI. Early commits leaked a few
+# credentials; they have been rotated and the fingerprints below mark them as
+# reviewed so CI only fails on NEW secrets.
 ignorePaths:
   - test/          # synthetic fixtures that intentionally look like secrets
 disabledRules: []
