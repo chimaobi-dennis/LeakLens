@@ -2,8 +2,7 @@
 
 ## 0.1.0 — 2026-10-21
 
-First release of LeakLens. The repository previously hosted an AI brand
-platform; that code is preserved in history under the `kinika-archive` tag.
+First release of LeakLens.
 
 - Rule engine with 27 provider rules, entropy filtering and semantic validation
 - Filesystem, git-history and staged-diff scanners
