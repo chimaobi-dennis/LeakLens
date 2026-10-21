@@ -60,15 +60,10 @@ Status key: ✅ done · 🔨 in progress · ⏳ planned
 - Rewriting git history automatically. That is destructive and belongs to the
   human, with the tool only generating the commands.
 
-## Submission checklist
+## Housekeeping
 
-- [x] Repository with real commit history (1,216 commits before the pivot,
-      new commits on top, nothing rewritten)
-- [x] Working CLI with tests and CI
-- [x] README with a real demo output, comparison table and usage
-- [x] This roadmap
-- [ ] Rotate the three leaked credentials found in history (owner action)
-- [ ] Make the repository public, or grant the reviewers access
-- [ ] Optional: rename the repository to `leaklens` on GitHub (redirects are
-      automatic; update `package.json` repository URL afterwards)
-- [ ] Optional: record a 60-second terminal demo (`npm run scan:self`)
+- [ ] Rotate the credentials the history scan surfaced and scrub them with
+      `git filter-repo --replace-text`
+- [ ] Drop the baseline entries from `.leaklens.yml` once history is clean
+- [ ] Rename the repository to `leaklens` and update `package.json`
+- [ ] Record a short terminal demo of `npm run scan:self` for the README
