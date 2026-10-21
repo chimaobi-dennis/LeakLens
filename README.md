@@ -8,7 +8,7 @@ introduced each one and how to rotate it.
 ```
 $ leaklens scan . --history
 
-CRITICAL Supabase Service Role Key  .env:3 @ 837d6e2a (gpt-engineer-app[bot], 2026-05-22)
+CRITICAL Supabase Service Role Key  .env:4 @ e7ba22c1 (Chimaobi Dennis, 2026-04-07)
          supabase-service-role-key  eyJh************************ZcvI  entropy 5.451  fp ee18659187eabb64
 MEDIUM   Generic API Key / Secret    src/lib/ai.ts:33 @ cf64bf05 (Chimaobi Dennis, 2026-03-23)
          generic-api-key             497f************************b0ad  entropy 4.254  fp 6e0914fb0dd8c665
