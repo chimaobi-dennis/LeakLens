@@ -1,14 +1,8 @@
 # LeakLens configuration for this repository.
 #
-# This repo scans its own full git history in CI. Early commits leaked a few
-# credentials; they have been rotated and the fingerprints below mark them as
-# reviewed so CI only fails on NEW secrets.
+# This repo scans its own full git history in CI.
 ignorePaths:
   - test/          # synthetic fixtures that intentionally look like secrets
 disabledRules: []
 allowSecrets: []
-baseline:
-  - ee18659187eabb64   # supabase-service-role-key, .env (rotated)
-  - a7c2b3ea91e7512e   # jwt (supabase anon key), .env (rotated)
-  - 7de43e63b0a6a73e   # generic-api-key, src/lib/ai.ts X-JoJAPI-Key (rotated)
-  - 6e0914fb0dd8c665   # generic-api-key, src/lib/ai.ts X-RapidAPI-Key (rotated)
+baseline: []

@@ -6,7 +6,7 @@
   "author": "Chimaobi Dennis <igsoftwebstudio@gmail.com>",
   "repository": {
     "type": "git",
-    "url": "https://github.com/chimaobi-dennis/founder-foundry-engine"
+    "url": "https://github.com/chimaobi-dennis/LeakLens"
   },
   "keywords": ["security", "secrets", "secret-scanning", "credentials", "git", "sarif", "devsecops"],
   "type": "module",

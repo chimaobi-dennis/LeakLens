@@ -20,7 +20,7 @@ export function formatSarif(result: ScanResult, version = "0.1.0"): string {
           driver: {
             name: "LeakLens",
             version,
-            informationUri: "https://github.com/chimaobi-dennis/founder-foundry-engine",
+            informationUri: "https://github.com/chimaobi-dennis/LeakLens",
             rules: rules.map((r) => ({
               id: r.id,
               name: r.name,
